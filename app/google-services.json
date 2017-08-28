@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1084943041740",
+    "firebase_url": "https://ccogestion-48238.firebaseio.com",
+    "project_id": "ccogestion-48238",
+    "storage_bucket": "ccogestion-48238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084943041740:android:e1f793402fa55830",
+        "android_client_info": {
+          "package_name": "com.cco.cristiancarlosjohn.ccogestion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084943041740-3ej7h36n70sb7kvgs5r3r4jmfmo14bq6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cco.cristiancarlosjohn.ccogestion",
+            "certificate_hash": "634d3efbc7e01614c3fa5c18b5920c8ed5d49d71"
+          }
+        },
+        {
+          "client_id": "1084943041740-a2ebdt23ces8iaga928ci3s6srpdn9dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgP-PNqdAIy7WpoxxAJY7ag_xqbu7M-1g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084943041740-a2ebdt23ces8iaga928ci3s6srpdn9dv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

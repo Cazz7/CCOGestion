@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CCOGestion</string>}
+
+    <!-- Diálogos del Login -->
+    <string name="enter_user">Por favor ingrese el usuario</string>
+    <string name="enter_pass">Por favor ingrese la contraseña</string>
+</resources>
