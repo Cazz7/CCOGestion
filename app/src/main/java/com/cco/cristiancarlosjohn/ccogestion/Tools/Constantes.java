@@ -28,5 +28,6 @@ public class Constantes {
     //Constantes para servicio HTTP - by Cristian
     public static final String GET_USERS = URL + "/cristian/obtener_usuario_por_id.php";
     public static final String REGISTER_TOKEN = URL + "/cristian/register_token.php";
+    public static String GROUP_TEST = "test";
 
 }

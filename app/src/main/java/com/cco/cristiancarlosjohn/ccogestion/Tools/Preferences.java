@@ -15,10 +15,15 @@ public class Preferences {
         return preferences.getString("pass", "");
     }
 
+    public static String getUserProfilePrefs(SharedPreferences preferences) {
+        return preferences.getString("perfil", "");
+    }
+
     public static void removeSharedPreferences(SharedPreferences preferences) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove("usuario");
         editor.remove("pass");
+        editor.remove("perfil");
         editor.apply();
     }
 }

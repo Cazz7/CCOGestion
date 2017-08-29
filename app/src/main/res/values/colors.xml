@@ -14,6 +14,7 @@
 
     <!--Colores varios-->
     <color name="colorWhite">#FFF</color>
+    <color name="colorRed">#FF0000</color>
 
     <!-- MINI FAB -->
     <color name="colorNormalMini">#00B0FF</color>

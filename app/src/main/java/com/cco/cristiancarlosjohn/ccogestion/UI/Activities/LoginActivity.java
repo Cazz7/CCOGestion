@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
+import com.cco.cristiancarlosjohn.ccogestion.WEB.FirebaseInstanceIDService;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private static final String TAG = LoginActivity.class.getSimpleName();
+    private static String perfil;
 
     private EditText editTextUsuario;
     private EditText editTextPassword;
@@ -53,11 +55,19 @@ public class LoginActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString();
                 login(usuario, password);
                 if (bLogin == true) {
-                    goToMain();
-                    saveOnPreferences(usuario, password);
+                    if (!perfil.isEmpty() && perfil != null) {
+                        getTokenAndRegister(usuario, perfil);
+                        goToMain();
+                        saveOnPreferences(usuario, password, perfil);
+                    }
                 }
             }
         });
+    }
+
+    private void getTokenAndRegister(String usuario, String perfil) {
+        FirebaseInstanceIDService firebaseService = new FirebaseInstanceIDService();
+        firebaseService.onTokenRefresh(usuario, perfil);
     }
 
     private void bindUI() {
@@ -67,11 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.buttonLogin);
     }
 
-    private void saveOnPreferences(String usuario, String password) {
+    private void saveOnPreferences(String usuario, String password, String perfil) {
         if (switchRemember.isChecked()) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
+            editor.putString("perfil", perfil);
             editor.apply();
         }
     }
@@ -152,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
             String estado = response.getString("estado");
             if (estado.equals("1")) {
                 bLogin = true;
+                perfil = response.getString("perfil");
             } else {
                 Toast toast = Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT);
                 toast.show();
