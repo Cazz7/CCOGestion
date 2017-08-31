@@ -26,33 +26,35 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         super.onTokenRefresh();
 
         FirebaseMessaging.getInstance().subscribeToTopic("test1");
-        String token = FirebaseInstanceId.getInstance().getToken();
+        //String token = FirebaseInstanceId.getInstance().getToken();
+        FirebaseInstanceId.getInstance().getToken();
         //String token = "HOLAAMIGO2";
         //Send token into the DB
-        if ((!TextUtils.isEmpty(token) && (token != null)) && (!TextUtils.isEmpty(usuario) && (usuario != null) )
-                && (!TextUtils.isEmpty(perfil) && (perfil != null) ) )
-                registerToken(token, usuario, perfil);
+        //if ((!TextUtils.isEmpty(token) && (token != null)) && (!TextUtils.isEmpty(usuario) && (usuario != null) )
+        //        && (!TextUtils.isEmpty(perfil) && (perfil != null) ) )
+
+                //registerToken(token, usuario, perfil);
     }
 
-    private void registerToken(String token, String usuario, String perfil) {
-
-        //Luego se hará sin volley
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("token",token)
-                .add("usuario",usuario)
-                .add("perfil",perfil)
-                .build();
-
-        Request request = new Request.Builder()
-                .url(Constantes.REGISTER_TOKEN)
-                .post(body)
-                .build();
-
-        try {
-            client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void registerToken(String token, String usuario, String perfil) {
+//
+//        //Luego se hará sin volley
+//        OkHttpClient client = new OkHttpClient();
+//        RequestBody body = new FormBody.Builder()
+//                .add("token",token)
+//                .add("usuario",usuario)
+//                .add("perfil",perfil)
+//                .build();
+//
+//        Request request = new Request.Builder()
+//                .url(Constantes.REGISTER_TOKEN)
+//                .post(body)
+//                .build();
+//
+//        try {
+//            client.newCall(request).execute();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

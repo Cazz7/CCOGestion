@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -22,28 +24,35 @@ import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.FirebaseInstanceIDService;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private static final String TAG = LoginActivity.class.getSimpleName();
-    private static String perfil;
 
     private EditText editTextUsuario;
     private EditText editTextPassword;
-    private Switch switchRemember;
     private Button btnLogin;
-    private boolean bLogin;
+    private ProgressBar pgbLogin;
+
+    private String usuarioOK;
+    private String passwordOK;
+    private Switch switchRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        bindUI();// Declaraión de elementos del layout
+        bindUI();// Declaración de elementos del layout
 
         prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         setCredentialsIfExist(); //Ingresa los datos del login
@@ -53,22 +62,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String usuario = editTextUsuario.getText().toString();
                 String password = editTextPassword.getText().toString();
-                login(usuario, password);
-                if (bLogin == true) {
-                    if (!perfil.isEmpty() && perfil != null) {
-                        getTokenAndRegister(usuario, perfil);
-                        goToMain();
-                        saveOnPreferences(usuario, password, perfil);
-                    }
-                }
+                login(usuario, password); // Confirma el usuario y registra su token
             }
         });
     }
 
-    private void getTokenAndRegister(String usuario, String perfil) {
-        FirebaseInstanceIDService firebaseService = new FirebaseInstanceIDService();
-        firebaseService.onTokenRefresh(usuario, perfil);
-    }
 
     private void bindUI() {
         editTextUsuario = (EditText) findViewById(R.id.editTextUser);
@@ -77,12 +75,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.buttonLogin);
     }
 
-    private void saveOnPreferences(String usuario, String password, String perfil) {
+    private void saveOnPreferences(String usuario, String password) {
         if (switchRemember.isChecked()) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
-            editor.putString("perfil", perfil);
             editor.apply();
         }
     }
@@ -103,40 +100,72 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void login(String usuario, String password) {
+    private void login(String usuario, final String password) {
+
+        HashMap<String, String> map = new HashMap<>();// Mapeo previo
+
+        //Elementos a enviar a la request php
+        map.put("usuario", usuario);
+        map.put("password", password);
+        map.put("token",FirebaseInstanceId.getInstance().getToken());
+
+        // Crear nuevo objeto Json basado en el mapa
+        JSONObject jobject = new JSONObject(map);
+
+        // Depurando objeto Json...
+        Log.d(TAG, jobject.toString());
 
         if(checkFields(usuario, password)){
-            // Añadir parámetro a la URL del web service
-            String newURL = Constantes.GET_USERS + "/?USUARIO=" + usuario + "&Password=" +  password;
-            // Petición GET
-            VolleySingleton.
-                    getInstance(this).
-                    addToRequestQueue(
-                            new JsonObjectRequest(
-                                    Request.Method.GET,
-                                    newURL,
-                                    null,
-                                    new Response.Listener<JSONObject>() {
+            usuarioOK = usuario;
+            passwordOK = password;
+            enableProgressBar();
+            VolleySingleton.getInstance(this).addToRequestQueue(
+                    new JsonObjectRequest(
+                            Request.Method.POST,
+                            Constantes.REGISTER_TOKEN,
+                            jobject,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // Procesar la respuesta del servidor
+                                    hideProgressBar();
+                                    procesarRespuesta(response);
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    hideProgressBar();
+                                    Log.d(TAG, "Error Volley: " + error.getMessage());
+                                }
+                            }
 
-                                        @Override
-                                        public void onResponse(JSONObject response) {
-                                            // Procesar la respuesta Json
-                                            procesarRespuesta(response);
-                                        }
-                                    },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            Log.d(TAG, "Error Volley: " + error.toString());
-                                        }
-                                    }
+                    )
+                    {
+                        @Override
+                        public Map<String, String> getHeaders() {
+                            Map<String, String> headers = new HashMap<String, String>();
+                            headers.put("Content-Type", "application/json; charset=utf-8");
+                            headers.put("Accept", "application/json");
+                            return headers;
+                        }
 
-                            )
-                    );
-        }else{
-            bLogin = false; //Login fallido
+                        @Override
+                        public String getBodyContentType() {
+                            return "application/json; charset=utf-8" + getParamsEncoding();
+                        }
+                    }
+            );
         }
+    }
 
+    private void hideProgressBar() {
+        pgbLogin.setVisibility(View.GONE);
+    }
+
+    private void enableProgressBar() {
+        pgbLogin = (ProgressBar) findViewById(R.id.progressBarLogin);
+        pgbLogin.setVisibility(View.VISIBLE);
     }
 
     private boolean checkFields(String usuario, String password) {
@@ -162,12 +191,11 @@ public class LoginActivity extends AppCompatActivity {
         try {
             String estado = response.getString("estado");
             if (estado.equals("1")) {
-                bLogin = true;
-                perfil = response.getString("perfil");
+                saveOnPreferences(usuarioOK, passwordOK);
+                goToMain();
             } else {
                 Toast toast = Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT);
                 toast.show();
-                bLogin = false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
