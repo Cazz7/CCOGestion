@@ -29,7 +29,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     //Qué hacer cuando el método ser recibe desde FCM
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        showNotification(remoteMessage.getData().get("message"),remoteMessage.getData().get("customKey"));
+        showNotification(remoteMessage.getData().get("idradicado"),remoteMessage.getData().get("cod_evento"));
     }
 
     private void showNotification(String message, String customKey) {

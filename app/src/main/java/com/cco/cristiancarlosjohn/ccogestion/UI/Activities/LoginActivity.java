@@ -91,10 +91,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setCredentialsIfExist() {
-        String email = Preferences.getUserPrefs(prefs);
+        String usuario = Preferences.getUserPrefs(prefs);
         String password = Preferences.getUserPassPrefs(prefs);
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            editTextUsuario.setText(email);
+        if (!TextUtils.isEmpty(usuario) && !TextUtils.isEmpty(password)) {
+            editTextUsuario.setText(usuario);
             editTextPassword.setText(password);
             switchRemember.setChecked(true);
         }

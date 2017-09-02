@@ -21,8 +21,8 @@ import okhttp3.RequestBody;
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
-    // Token received
-    public void onTokenRefresh(String usuario, String perfil) {
+    @Override
+    public void onTokenRefresh() {
         super.onTokenRefresh();
 
         FirebaseMessaging.getInstance().subscribeToTopic("test1");
@@ -35,6 +35,22 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
                 //registerToken(token, usuario, perfil);
     }
+
+    // Token received
+
+//    public void onTokenRefresh(String usuario, String perfil) {
+//        super.onTokenRefresh();
+//
+//        FirebaseMessaging.getInstance().subscribeToTopic("test1");
+//        //String token = FirebaseInstanceId.getInstance().getToken();
+//        FirebaseInstanceId.getInstance().getToken();
+//        //String token = "HOLAAMIGO2";
+//        //Send token into the DB
+//        //if ((!TextUtils.isEmpty(token) && (token != null)) && (!TextUtils.isEmpty(usuario) && (usuario != null) )
+//        //        && (!TextUtils.isEmpty(perfil) && (perfil != null) ) )
+//
+//                //registerToken(token, usuario, perfil);
+//    }
 
 //    private void registerToken(String token, String usuario, String perfil) {
 //
