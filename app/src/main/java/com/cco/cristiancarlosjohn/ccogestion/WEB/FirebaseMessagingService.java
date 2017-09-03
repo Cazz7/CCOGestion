@@ -23,16 +23,22 @@ import java.util.Random;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
 
-    private int id_not = 0;
+    private static int id_not = 0;
 
     @Override
     //Qué hacer cuando el método ser recibe desde FCM
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        showNotification(remoteMessage.getData().get("idradicado"),remoteMessage.getData().get("cod_evento"));
+        showNotification(remoteMessage.getData().get("idradicado"),
+                remoteMessage.getData().get("cod_evento"),
+                remoteMessage.getData().get("via"),
+                remoteMessage.getData().get("kilo_sector"));
     }
 
-    private void showNotification(String message, String customKey) {
+    private void showNotification(String idradicado,
+                                  String cod_evento,
+                                  String via,
+                                  String kilo_sector) {
         Intent i = new Intent(this,MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -49,12 +55,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setAutoCancel(true)
-                .setContentTitle(customKey)
+                .setContentTitle(cod_evento + " " + idradicado)
                 .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-                .setContentText(message)
+                .setContentText(via + "-" + kilo_sector)
                 .setGroup(Constantes.GROUP_TEST)
                 .setLights(Color.CYAN, 3000, 3000)
-                .setSmallIcon(R.drawable.splash_logo)
+                .setSmallIcon(R.drawable.notification_icon2)
                 .setContentIntent(pendingIntent);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
