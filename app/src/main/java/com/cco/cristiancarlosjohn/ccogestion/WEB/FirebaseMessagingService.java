@@ -1,5 +1,6 @@
 package com.cco.cristiancarlosjohn.ccogestion.WEB;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -55,13 +56,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setAutoCancel(true)
-                .setContentTitle(cod_evento + " " + idradicado)
-                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-                .setContentText(via + "-" + kilo_sector)
-                .setGroup(Constantes.GROUP_TEST)
+                .setContentTitle(cod_evento + " " + "Radicado: " + idradicado)
+                .setVibrate(new long[] { 500, 500, 500, 500, 500 })
+                .setContentText(via + " - " + kilo_sector)
                 .setLights(Color.CYAN, 3000, 3000)
-                .setSmallIcon(R.drawable.notification_icon2)
+                .setSmallIcon(R.drawable.notification_icon3)
                 .setContentIntent(pendingIntent);
+
+        builder.setDefaults(Notification.DEFAULT_SOUND);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 //        manager.notify(0, groupBuilder.build());
