@@ -4,4 +4,17 @@
     <!-- Diálogos del Login -->
     <string name="enter_user">Por favor ingrese el usuario</string>
     <string name="enter_pass">Por favor ingrese la contraseña</string>
+    <string name="title_activity_confirmation">ConfirmationActivity</string>
+
+    <!-- Diálogos de la confirmación -->
+    <string name="detalle_titulo">Detalle del evento</string>
+    <string name="radicado">Radicado: </string>
+    <string name="cod_evento">Código: </string>
+    <string name="via">Vía: </string>
+    <string name="sector">Sector: </string>
+    <string name="btxtDetalle">Ver Detalle</string>
+    <string name="btxtAceptar">Acepto</string>
+    <string name="btxtLlegar">Llegué al sitio</string>
+    <string name="btxtSuperar">Evento superado</string>
+
 </resources>

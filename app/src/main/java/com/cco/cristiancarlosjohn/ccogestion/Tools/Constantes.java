@@ -29,5 +29,9 @@ public class Constantes {
     public static final String GET_USERS = URL + "/cristian/obtener_usuario_por_id.php";
     public static final String REGISTER_TOKEN = URL + "/cristian/register_token.php";
     public static String GROUP_TEST = "test";
+    public static final String RADICADO = "idradicado";
+    public static final String COD_EVENTO = "cod_evento";
+    public static final String VIA = "via";
+    public static final String SECTOR = "kilo_sector";
 
 }

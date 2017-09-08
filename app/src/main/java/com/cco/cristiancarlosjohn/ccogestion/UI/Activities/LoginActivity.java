@@ -179,7 +179,6 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
-
     /**
      * Interpreta los resultados de la respuesta y así
      * realizar las operaciones correspondientes

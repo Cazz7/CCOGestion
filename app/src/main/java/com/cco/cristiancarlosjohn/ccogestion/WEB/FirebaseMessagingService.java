@@ -3,20 +3,14 @@ package com.cco.cristiancarlosjohn.ccogestion.WEB;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.IBinder;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
-import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.ConfirmationActivity;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Random;
 
 /**
  * Created by cristian.zapata on 27/08/2017.
@@ -30,17 +24,21 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     //Qué hacer cuando el método ser recibe desde FCM
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        showNotification(remoteMessage.getData().get("idradicado"),
-                remoteMessage.getData().get("cod_evento"),
-                remoteMessage.getData().get("via"),
-                remoteMessage.getData().get("kilo_sector"));
+        showNotification(remoteMessage.getData().get(Constantes.RADICADO),
+                remoteMessage.getData().get(Constantes.COD_EVENTO),
+                remoteMessage.getData().get(Constantes.VIA),
+                remoteMessage.getData().get(Constantes.SECTOR));
     }
 
     private void showNotification(String idradicado,
                                   String cod_evento,
                                   String via,
                                   String kilo_sector) {
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this,ConfirmationActivity.class);
+        i.putExtra(Constantes.RADICADO, idradicado);
+        i.putExtra(Constantes.COD_EVENTO, cod_evento);
+        i.putExtra(Constantes.VIA, via);
+        i.putExtra(Constantes.SECTOR, kilo_sector);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
@@ -61,6 +59,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(via + " - " + kilo_sector)
                 .setLights(Color.CYAN, 3000, 3000)
                 .setSmallIcon(R.drawable.notification_icon3)
+                .setColor(Color.WHITE)
                 .setContentIntent(pendingIntent);
 
         builder.setDefaults(Notification.DEFAULT_SOUND);

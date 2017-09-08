@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- Actividad Splash -->
         <activity
             android:name=".UI.Activities.SplashActivity"
@@ -21,28 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".UI.Activities.MainActivity">
-        </activity>
-        <activity
-            android:name=".UI.Activities.LoginActivity">
-        </activity>
+        <activity android:name=".UI.Activities.MainActivity"></activity>
+        <activity android:name=".UI.Activities.LoginActivity"></activity>
 
         <!-- Firebase -->
-        <service
-            android:name=".WEB.FirebaseMessagingService">
+        <service android:name=".WEB.FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <!-- Token -->
-        <service
-            android:name=".WEB.FirebaseInstanceIDService">
+        <service android:name=".WEB.FirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".UI.Activities.ConfirmationActivity"
+            android:label="@string/title_activity_confirmation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
