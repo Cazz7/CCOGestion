@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activities.MainActivity"></activity>
-        <activity android:name=".UI.Activities.LoginActivity"></activity>
+        <activity android:name=".UI.Activities.MainActivity" />
+        <activity android:name=".UI.Activities.LoginActivity" />
 
         <!-- Firebase -->
         <service android:name=".WEB.FirebaseMessagingService">
@@ -40,9 +40,18 @@
         </service>
 
         <activity
-            android:name=".UI.Activities.ConfirmationActivity"
+            android:name=".UI.Activities.ConfirmActivity"
             android:label="@string/title_activity_confirmation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Actividad Insertar -->
+        <activity
+            android:name=".UI.Activities.InsertActivity"
+            android:label="@string/title_activity_insert"
+            android:parentActivityName=".UI.Activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

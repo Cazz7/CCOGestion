@@ -9,7 +9,7 @@ import android.support.v7.app.NotificationCompat;
 
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
-import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.ConfirmationActivity;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.ConfirmActivity;
 import com.google.firebase.messaging.RemoteMessage;
 
 /**
@@ -34,7 +34,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                   String cod_evento,
                                   String via,
                                   String kilo_sector) {
-        Intent i = new Intent(this,ConfirmationActivity.class);
+        Intent i = new Intent(this,ConfirmActivity.class);
         i.putExtra(Constantes.RADICADO, idradicado);
         i.putExtra(Constantes.COD_EVENTO, cod_evento);
         i.putExtra(Constantes.VIA, via);

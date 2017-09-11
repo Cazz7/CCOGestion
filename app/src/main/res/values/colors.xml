@@ -3,13 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="primary">#3e7833</color>
-    <color name="accent">#44ae3b</color>
-    <color name="ripple">#98fda9</color>
+    <color name="primary">#009688</color>
+    <color name="accent">#03A9F4</color>
+    <color name="ripple">#B2DFDB</color>
     <color name="tertiary">#455561</color>
     <color name="background">#FFFFFF</color>
-    <color name="textColorPrimary">#323232</color>
-    <color name="textColorSecondary">#434343</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="divider">#BDBDBD</color>
     <color name="transparent_actionbar_background">#24000000</color>
 
     <!--Colores varios-->

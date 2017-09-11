@@ -1,10 +1,27 @@
 <resources>
-    <string name="app_name">CCO</string>}
+    <string name="app_name">CCO</string>
 
+    <!-- Actividades -->
+    <string name="title_activity_eventoscurso">Eventos en Curso</string>
+    <string name="title_activity_update">Editar Meta</string>
+    <string name="title_activity_detail">Detalle</string>
+    <string name="title_activity_insert">Insertar Nuevo Evento</string>
+
+    <!--Action Buttons-->
+    <string name="action_delete">Borrar</string>
+    <string name="action_discard">Descartar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_done">Guardar</string>
     <!-- Diálogos del Login -->
     <string name="enter_user">Por favor ingrese el usuario</string>
     <string name="enter_pass">Por favor ingrese la contraseña</string>
     <string name="title_activity_confirmation">ConfirmationActivity</string>
+
+    <!-- Diálogos -->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_discard_msg">¿Descartar Cambios?</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_delete_msg">Se eliminará</string>
 
     <!-- Diálogos de la confirmación -->
     <string name="detalle_titulo">Detalle del evento</string>
@@ -16,5 +33,33 @@
     <string name="btxtAceptar">Acepto</string>
     <string name="btxtLlegar">Llegué al sitio</string>
     <string name="btxtSuperar">Evento superado</string>
+
+    <!-- Codigos de eventos -->
+    <string-array name="entradas_Cod_Eventos">
+        <item>AT</item>
+        <item>PA</item>
+        <item>TL</item>
+        <item>SG</item>
+        <item>PEV</item>
+    </string-array>
+
+    <!-- Vias-->
+    <string-array name="entradas_Vias">
+        <item>VARIANTE LAS PALMAS</item>
+        <item>DOBLE CALZADA</item>
+        <item>SANTA ELENA</item>
+        <item>OTRA</item>
+    </string-array>
+
+    <!-- Unidades de operación -->
+    <string name="DITRA">DITRA</string>
+    <string name="AMBULANCIA">AMBULANCIA</string>
+    <string name="GRUA">GRUA</string>
+    <string name="CUADRILLA_MTTO_VP_Y_SE">CUADRILLA_MTTO_VP_Y_SE</string>
+    <string name="CUADRILLA_MTTO_DC">CUADRILLA_MTTO_DC</string>
+    <string name="TTO_MEDELLIN">TTO_MEDELIN</string>
+    <string name="TTO_ENVIGADO">TTO_ENVIGADO</string>
+    <string name="TTO_RIONEGRO">TTO_RIONEGRO</string>
+    <string name="CONCESION">CONCESIÓN</string>
 
 </resources>

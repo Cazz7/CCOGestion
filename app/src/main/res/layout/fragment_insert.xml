@@ -1,0 +1,164 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:weightSum="1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- Etiqueta Fecha -->
+            <TextView
+                android:id="@+id/fecha_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FECHA:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
+
+            <!-- Fecha -->
+            <TextView
+                android:id="@+id/fecha_ejemplo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015/05/17"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <!-- Etiqueta Codigo de evento -->
+
+            <TextView
+                android:id="@+id/Cod_Evento_texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:text="CODIGO DE EVENTO::"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
+            <!-- Codigos de eventos-->
+            <Spinner
+                android:id="@+id/Cod_Evento_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:entries="@array/entradas_Cod_Eventos" />
+
+            <!-- Etiqueta Via -->
+            <TextView
+                android:id="@+id/Via_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/categoria_spinner"
+                android:text="VIA:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/margin_Top"/>
+
+            <Spinner
+                android:id="@+id/Via_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:layout_below="@+id/prioridad_text"
+                android:entries="@array/entradas_Vias" />
+
+            <!-- Kilometraje o Sector-->
+            <EditText
+                android:id="@+id/kiloSector_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Kilometraje o Sector"
+                android:layout_marginTop="@dimen/margin_Top"/>
+            <!-- Nombre quien reporta-->
+            <EditText
+                android:id="@+id/Nombre_Reporta_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:hint="Nombre quien reporta" />
+            <!-- Contacto-->
+            <EditText
+                android:id="@+id/Contacto_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:hint="Contacto"
+                />
+            <!-- Etiqueta Observaciones -->
+
+            <TextView
+                android:id="@+id/Observaciones_texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OBSERVACIONES:"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
+            <EditText
+                android:id="@+id/Observaciones_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_weight="0.73" />
+
+            <!-- Etiqueta NOTIFICACIONES -->
+            <TextView
+                android:id="@+id/Notificaciones_texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOTIFICACIONES:"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
+
+            <!-- NOTIFICACIONES -->
+
+            <CheckBox android:id="@+id/DITRA_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/DITRA"/>
+            <CheckBox android:id="@+id/AMBULANCIA_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AMBULANCIA"/>
+            <CheckBox android:id="@+id/GRUA_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/GRUA"/>
+            <CheckBox android:id="@+id/CUADRILLA_MTTO_VP_Y_SE_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CUADRILLA_MTTO_VP_Y_SE"/>
+            <CheckBox android:id="@+id/CUADRILLA_MTTO_DC_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CUADRILLA_MTTO_DC"/>
+            <CheckBox android:id="@+id/CONCESION_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CONCESION"/>
+            <CheckBox android:id="@+id/TTO_MEDELLIN_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TTO_MEDELLIN"/>
+            <CheckBox android:id="@+id/TTO_ENVIGADO_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TTO_ENVIGADO"/>
+            <CheckBox android:id="@+id/TTO_RIONEGRO_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TTO_RIONEGRO"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
