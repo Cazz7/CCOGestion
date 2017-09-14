@@ -130,9 +130,11 @@ public class ConfirmActivity extends AppCompatActivity {
     }
 
     private void createVolleyRequest(String accion) {
-        HashMap<String, String> map = new HashMap<>();// Mapeo previo
+
+        HashMap<String, String> map = new HashMap<>();
 
         String observaciones = obtenerObservaciones(accion);
+
         //Elementos a enviar a la request php
         map.put(Constantes.IDRADICADO, tvRadicado.getText().toString());
         map.put(Constantes.FECHA_CREACION, ObtenerTiempo());
