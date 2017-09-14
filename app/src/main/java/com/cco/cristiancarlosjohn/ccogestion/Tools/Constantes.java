@@ -43,7 +43,6 @@ public class Constantes {
     public static final String GET_EVENTOS_CURSO = URL_C +"/obtener_radicados.php";
     public static final String INSERT_EVENTOS_CURSO = URL_C +"/insertar_radicado.php";
     public static final String RESPUESTAS_UNIDADES = URL_C +"/RespuestasUnidades.php";
-    public static final String RESPUESTAS_UNIDADES2 = URL_C +"/RespuestasUnidades.php";
 
     //NOTIFICACIONES
     public static final String GET_NOTIFICACIONES = "https://ptcazz.000webhostapp.com/cristian/push_notification.php";
