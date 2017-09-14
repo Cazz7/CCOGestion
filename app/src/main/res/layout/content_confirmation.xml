@@ -163,6 +163,7 @@
                 android:background="@color/espiritualColor"
                 android:textColor="@color/colorWhite"
                 android:layout_marginBottom="2dp"
+                android:onClick="onAction"
                 android:text="@string/btxtAceptar" />
             <Button
                 android:id="@+id/btnLlegarEvento"
@@ -171,6 +172,7 @@
                 android:background="@color/espiritualColor"
                 android:textColor="@color/colorWhite"
                 android:layout_marginBottom="2dp"
+                android:onClick="onAction"
                 android:text="@string/btxtLlegar" />
             <Button
                 android:id="@+id/btnSuperarEvento"
@@ -178,6 +180,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/espiritualColor"
                 android:textColor="@color/colorWhite"
+                android:onClick="onAction"
                 android:text="@string/btxtSuperar" />
         </LinearLayout>
 

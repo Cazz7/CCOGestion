@@ -1,5 +1,6 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.cco.cristiancarlosjohn.ccogestion.Model.Radicados;
 import com.cco.cristiancarlosjohn.ccogestion.R;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.ConfirmActivity;
 
 import java.util.List;
 
@@ -48,20 +50,17 @@ public class RadicadosAdapter extends RecyclerView.Adapter<RadicadosAdapter.Meta
         viewHolder.categoria.setText(items.get(i).getCod_Evento());
     }
 
-    /**
-     * Sobrescritura del método de la interfaz {@link ItemClickListener}
-     *
-     * @param view     item actual
-     * @param position posición del item actual
-     */
     @Override
     public void onItemClick(View view, int position) {
-         Toast.makeText(
-                 view.getContext(),
-                 items.get(position).getIdRadicado(),
-                Toast.LENGTH_LONG).show();
-        /*DetailActivity.launch(
-                (Activity) context, items.get(position).getIdMeta());*/
+//         Toast.makeText(
+//                 view.getContext(),
+//                 items.get(position).getIdRadicado(),
+//                Toast.LENGTH_LONG).show();
+        ConfirmActivity.launch(
+                (Activity) context, items.get(position).getIdRadicado(),
+                items.get(position).getCod_Evento(),
+                items.get(position).getVia(),
+                items.get(position).getKiloSector());
     }
 
 

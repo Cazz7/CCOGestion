@@ -12,6 +12,8 @@
     <string name="action_discard">Descartar</string>
     <string name="action_edit">Editar</string>
     <string name="action_done">Guardar</string>
+    <string name="action_logout">Desconectarse</string>
+
     <!-- Diálogos del Login -->
     <string name="enter_user">Por favor ingrese el usuario</string>
     <string name="enter_pass">Por favor ingrese la contraseña</string>
@@ -61,5 +63,8 @@
     <string name="TTO_ENVIGADO">TTO_ENVIGADO</string>
     <string name="TTO_RIONEGRO">TTO_RIONEGRO</string>
     <string name="CONCESION">CONCESIÓN</string>
+    <string name="accion_aceptar">ACEPTAR</string>
+    <string name="accion_llegar">LLEGAR</string>
+    <string name="accion_disponible">DISPONIBLE</string>
 
 </resources>

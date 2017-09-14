@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         bindUI();// Declaración de elementos del layout
-
         prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         setCredentialsIfExist(); //Ingresa los datos del login
 
@@ -75,18 +74,26 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.buttonLogin);
     }
 
-    private void saveOnPreferences(String usuario, String password) {
+    private void saveOnPreferences(String usuario, String password, String perfil) {
         if (switchRemember.isChecked()) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
+            editor.putString("perfil", perfil);
+            editor.apply();
+        }else{
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("perfil", perfil);
             editor.apply();
         }
     }
 
-    private void goToMain() {
+    private void goToMain(String perfil) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //Toast toast = Toast.makeText(this, perfil , Toast.LENGTH_SHORT);
+        //toast.show();
+        intent.putExtra(Constantes.PERFILES, perfil );
         startActivity(intent);
     }
 
@@ -161,10 +168,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void hideProgressBar() {
         pgbLogin.setVisibility(View.GONE);
+        btnLogin.setEnabled(true);
+        switchRemember.setEnabled(true);
     }
 
     private void enableProgressBar() {
         pgbLogin = (ProgressBar) findViewById(R.id.progressBarLogin);
+        btnLogin.setEnabled(false); // Se desactiva mientras se espera la respuesta
+        switchRemember.setEnabled(false);
         pgbLogin.setVisibility(View.VISIBLE);
     }
 
@@ -190,8 +201,9 @@ public class LoginActivity extends AppCompatActivity {
         try {
             String estado = response.getString("estado");
             if (estado.equals("1")) {
-                saveOnPreferences(usuarioOK, passwordOK);
-                goToMain();
+                String perfil = response.getString("perfil");
+                saveOnPreferences(usuarioOK, passwordOK, perfil);
+                goToMain(perfil);
             } else {
                 Toast toast = Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT);
                 toast.show();

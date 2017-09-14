@@ -16,4 +16,11 @@
         android:orderInCategory="4"
         android:title="@string/action_delete"
         app:showAsAction="never" />
+
+    <!-- Logout -->
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="4"
+        android:title="@string/action_logout"
+        app:showAsAction="never" />
 </menu>

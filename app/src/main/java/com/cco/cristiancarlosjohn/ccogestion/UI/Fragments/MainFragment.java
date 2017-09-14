@@ -2,6 +2,7 @@ package com.cco.cristiancarlosjohn.ccogestion.UI.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.Model.Radicados;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertActivity;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Adapters.RadicadosAdapter;
 
@@ -79,6 +81,12 @@ public class MainFragment extends Fragment {
         // Cargar datos en el adaptador
         cargarAdaptador();
 
+        //Prueba
+        //SharedPreferences prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        String perfil = Preferences.getUserProfilePrefs(prefs);
+        Toast toast = Toast.makeText(getActivity(), perfil , Toast.LENGTH_SHORT);
+        toast.show();
         // Obtener instancia del FAB
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabAdd);
 
@@ -93,6 +101,7 @@ public class MainFragment extends Fragment {
                     }
                 }
         );
+
 
         return v;
     }
