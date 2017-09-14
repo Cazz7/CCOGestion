@@ -3,6 +3,7 @@ package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,17 +21,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
 public class ConfirmActivity extends AppCompatActivity {
+
+    SharedPreferences prefs;
 
     //Componentes UI
     Toolbar toolbar;
@@ -43,6 +48,7 @@ public class ConfirmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
+        prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         bindUI();
 
         setSupportActionBar(toolbar);
@@ -124,41 +130,44 @@ public class ConfirmActivity extends AppCompatActivity {
     }
 
     private void createVolleyRequest(String accion) {
-    /*    HashMap<String, String> map = new HashMap<>();// Mapeo previo
+        HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
+        String observacion = obtenerObservaciones(accion);
         //Elementos a enviar a la request php
-        map.put("usuario", usuario);
-        map.put("password", password);
-        map.put("token", FirebaseInstanceId.getInstance().getToken());
+        map.put(Constantes.IDRADICADO, tvRadicado.getText().toString());
+        map.put(Constantes.FECHA_CREACION, ObtenerTiempo());
+        map.put(Constantes.COD_EVENTO2, tvCodigo.getText().toString());
+        map.put(Constantes.SUB_EVENTO, "");
+        map.put(Constantes.OBSERVACIONES, observacion);
+        map.put(Constantes.ESTADO, "ABIERTO"); //TODO: Mirar este estado de donde se obtiene
+        map.put(Constantes.USUARIO, Preferences.getUserPrefs(prefs));
+        map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo()); //TODO: Cúal es esta fecha ?
+        map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Obtener estos perfiles para notificar
+        map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
+        map.put(Constantes.UNIDAD, Preferences.getUserProfilePrefs(prefs));
 
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
 
         // Depurando objeto Json...
-        Log.d(TAG, jobject.toString());
+        Log.d("json_confirm", jobject.toString());
 
-        if(checkFields(usuario, password)){
-            usuarioOK = usuario;
-            passwordOK = password;
-            enableProgressBar();
             VolleySingleton.getInstance(this).addToRequestQueue(
                     new JsonObjectRequest(
                             Request.Method.POST,
-                            Constantes.REGISTER_TOKEN,
+                            Constantes.RESPUESTAS_UNIDADES,
                             jobject,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     // Procesar la respuesta del servidor
-                                    hideProgressBar();
                                     procesarRespuesta(response);
                                 }
                             },
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    hideProgressBar();
-                                    Log.d(TAG, "Error Volley: " + error.getMessage());
+                                    Log.d("error_volley", "Error Volley: " + error.getMessage());
                                 }
                             }
 
@@ -178,6 +187,46 @@ public class ConfirmActivity extends AppCompatActivity {
                         }
                     }
             );
-        }*/
+    }
+
+    private String obtenerObservaciones(String accion) {
+
+        String parte1 = getResources().getString(R.string.observacion_parte1);
+        String parte2 = getResources().getString(R.string.observacion_parte2);
+        String parte3 = getResources().getString(R.string.observacion_parte3);
+        String tarea = accion; //TODO: Obtener la acción paramétrica
+        String ubicacion = "Peaje palmas"; //TODO: Crear alert dialog para la ubicación
+
+        //Se obtienen los datos del login
+        String salida = parte1 + " " +
+                        Preferences.getUserPrefs(prefs) + " " +
+                        Preferences.getUserProfilePrefs(prefs) + " " +
+                        parte2 + " " +
+                        tarea + " " +
+                        parte3 + " " +
+                        ubicacion;
+
+        return salida;
+    }
+
+    private String ObtenerTiempo() {
+
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        int second = c.get(Calendar.SECOND);
+
+        return String.valueOf(year) + "-" +
+                        String.valueOf(month) + "-" +
+                        String.valueOf(day) + " " +
+                        String.valueOf(hour) + ":" +
+                        String.valueOf(minute) + ":" +
+                        String.valueOf(second);
+    }
+
+    private void procesarRespuesta(JSONObject response) {
     }
 }

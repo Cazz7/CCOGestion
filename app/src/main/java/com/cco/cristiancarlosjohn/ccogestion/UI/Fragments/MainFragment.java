@@ -81,12 +81,10 @@ public class MainFragment extends Fragment {
         // Cargar datos en el adaptador
         cargarAdaptador();
 
-        //Prueba
-        //SharedPreferences prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        //Se obtiene el perfil
         SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         String perfil = Preferences.getUserProfilePrefs(prefs);
-        Toast toast = Toast.makeText(getActivity(), perfil , Toast.LENGTH_SHORT);
-        toast.show();
+
         // Obtener instancia del FAB
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabAdd);
 
