@@ -119,10 +119,6 @@ public class InsertFragment extends Fragment {
                                             // else if the item is already in the array, remove it
                                             mSelectedItems.remove(Integer.valueOf(which));
                                         }
-
-                                        // you can also add other codes here,
-                                        // for example a tool tip that gives user an idea of what he is selecting
-                                        // showToast("Just an example description.");
                                     }
 
                                 })
