@@ -19,8 +19,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.MyApp;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.FirebaseInstanceIDService;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
@@ -80,10 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             //TODO: Crear un método para obtener el perfil
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
-            editor.putString("perfil", perfil);
-            editor.apply();
-        }else{
-            SharedPreferences.Editor editor = prefs.edit();
             editor.putString("perfil", perfil);
             editor.apply();
         }
@@ -203,6 +201,7 @@ public class LoginActivity extends AppCompatActivity {
             String estado = response.getString("estado");
             if (estado.equals("1")) {
                 String perfil = response.getString("perfil");
+                saveUserData(usuarioOK, passwordOK, perfil);
                 saveOnPreferences(usuarioOK, passwordOK, perfil);
                 goToMain(perfil);
             } else {
@@ -212,5 +211,12 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveUserData(String usuarioOK, String passwordOK, String perfil) {
+        DatosUsuario.setUsuario(usuarioOK);
+        DatosUsuario.setPassword(passwordOK);
+        DatosUsuario.setPerfil(perfil);
+        MyApp.setPerfil(perfil);
     }
 }

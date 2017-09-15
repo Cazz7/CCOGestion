@@ -19,9 +19,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.Model.Radicados;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.MyApp;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertActivity;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Adapters.RadicadosAdapter;
@@ -36,29 +38,19 @@ import java.util.Arrays;
 
 public class MainFragment extends Fragment {
 
-    /*
-    Etiqueta de depuracion
-     */
+    //Etiqueta de depuracion
     private static final String TAG = MainFragment.class.getSimpleName();
 
-    /*
-    Adaptador del recycler view
-     */
+    //Adaptador del recycler view
     private RadicadosAdapter adapter;
 
-    /*
-    Instancia global del recycler view
-     */
+    //Instancia global del recycler view
     private RecyclerView lista;
 
-    /*
-    instancia global del administrador
-     */
+    //instancia global del administrador
     private RecyclerView.LayoutManager lManager;
 
-    /*
-    Instancia global del FAB
-     */
+    //Instancia global del FAB
     FloatingActionButton fabAdd;
     private Gson gson = new Gson();
 
@@ -82,8 +74,12 @@ public class MainFragment extends Fragment {
         cargarAdaptador();
 
         //Se obtiene el perfil
-        SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-        String perfil = Preferences.getUserProfilePrefs(prefs);
+        //SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        String perfil = DatosUsuario.getPerfil();//TODO: Hacer esto con bases de datos
+        Toast.makeText(
+                getActivity(),
+                perfil,
+                Toast.LENGTH_LONG).show();//TODO: Eliminar este toast es solo para pruebas
 
         // Obtener instancia del FAB
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabAdd);

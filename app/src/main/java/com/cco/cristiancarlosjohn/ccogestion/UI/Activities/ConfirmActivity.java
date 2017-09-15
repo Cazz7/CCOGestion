@@ -3,9 +3,7 @@ package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
@@ -42,7 +41,6 @@ import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
-    SharedPreferences prefs;
     ArrayList mUnidSelecciondas;
 
     //Componentes UI
@@ -56,7 +54,6 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         bindUI();
 
         setSupportActionBar(toolbar);
@@ -161,11 +158,11 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         map.put(Constantes.SUB_EVENTO, "");
         map.put(Constantes.OBSERVACIONES, observacion);
         map.put(Constantes.ESTADO, "ABIERTO");
-        map.put(Constantes.USUARIO, Preferences.getUserPrefs(prefs));
+        map.put(Constantes.USUARIO, DatosUsuario.getUsuario());//TODO: Hacer esto con bases de datos
         map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo());
         map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Pendiente: Notificará al GESTION_VIAL y Mismo perfil
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
-        map.put(Constantes.UNIDAD, Preferences.getUserProfilePrefs(prefs));
+        map.put(Constantes.UNIDAD, DatosUsuario.getPerfil());//TODO: Hacer esto con bases de datos
 
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
@@ -220,8 +217,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
-                        Preferences.getUserPrefs(prefs) + " " +
-                        Preferences.getUserProfilePrefs(prefs) + " " +
+                        DatosUsuario.getUsuario() + " " +
+                        DatosUsuario.getPerfil() + " " +
                         parte2 + " " +
                         tarea + " " +
                         parte3 + " " +
