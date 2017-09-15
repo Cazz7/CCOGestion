@@ -84,5 +84,6 @@
     <string name="observacion_parte1">Informa Usuario:\u0020</string>
     <string name="observacion_parte2">que\u0020</string>
     <string name="observacion_parte3">desde</string>
+    <string name="observacion_parte4">hasta</string>
 
 </resources>
