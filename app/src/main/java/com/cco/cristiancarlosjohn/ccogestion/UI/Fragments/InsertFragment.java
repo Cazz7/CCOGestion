@@ -106,6 +106,7 @@ public class InsertFragment extends Fragment {
                                 // and the listener through which to receive call backs when items are selected
                                 // R.array.choices were set in the resources res/values/strings.xml
                                 // Prueba
+                                // Prueba2
                                 .setMultiChoiceItems(R.array.unidades_operacion, null, new DialogInterface.OnMultiChoiceClickListener() {
 
                                     @Override
