@@ -110,7 +110,7 @@
                 android:layout_weight="0.73" />
 
             <!-- Etiqueta NOTIFICACIONES -->
-            <TextView
+            <Button
                 android:id="@+id/Notificaciones_texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,44 +119,6 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@android:color/black" />
 
-            <!-- NOTIFICACIONES -->
-
-            <CheckBox android:id="@+id/DITRA_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/DITRA"/>
-            <CheckBox android:id="@+id/AMBULANCIA_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AMBULANCIA"/>
-            <CheckBox android:id="@+id/GRUA_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/GRUA"/>
-            <CheckBox android:id="@+id/CUADRILLA_MTTO_VP_Y_SE_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CUADRILLA_MTTO_VP_Y_SE"/>
-            <CheckBox android:id="@+id/CUADRILLA_MTTO_DC_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CUADRILLA_MTTO_DC"/>
-            <CheckBox android:id="@+id/CONCESION_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CONCESION"/>
-            <CheckBox android:id="@+id/TTO_MEDELLIN_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TTO_MEDELLIN"/>
-            <CheckBox android:id="@+id/TTO_ENVIGADO_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TTO_ENVIGADO"/>
-            <CheckBox android:id="@+id/TTO_RIONEGRO_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TTO_RIONEGRO"/>
 
         </LinearLayout>
     </ScrollView>

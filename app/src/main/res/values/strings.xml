@@ -53,6 +53,19 @@
         <item>OTRA</item>
     </string-array>
 
+    <!-- Array Unidades de operación -->
+    <string-array name="unidades_operacion">
+        <item>DITRA</item>
+        <item>AMBULANCIA</item>
+        <item>GRÚA</item>
+        <item>MTTO_VP_Y_SE</item>
+        <item>MTTO_DC</item>
+        <item>CONCESIÓN</item>
+        <item>MOVILIDAD_MEDELLIN</item>
+        <item>MOVILIDAD_ENVIGADO</item>
+        <item>MOVILIDAD_RIONEGRO</item>
+    </string-array>
+
     <!-- Unidades de operación -->
     <string name="DITRA">DITRA</string>
     <string name="AMBULANCIA">AMBULANCIA</string>

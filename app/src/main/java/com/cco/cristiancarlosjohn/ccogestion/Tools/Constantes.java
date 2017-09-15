@@ -7,6 +7,24 @@ package com.cco.cristiancarlosjohn.ccogestion.Tools;
  */
 public class Constantes {
 
+    public String Radicado;
+
+    public Constantes(String radicado) {
+        Radicado = radicado;
+    }
+
+    public Constantes() {
+
+    }
+
+    public String getRadicado() {
+        return Radicado;
+    }
+
+    public void setRadicado(String radicado) {
+        Radicado = radicado;
+    }
+
     //Constantes para servicio HTTP - by Cristian
     private static final String URL = "https://ptcazz.000webhostapp.com";
 
@@ -41,7 +59,7 @@ public class Constantes {
     //URLs del Web Service
     private static final String URL_C = "http://ptcazz.000webhostapp.com/Carlos_C";
     public static final String GET_EVENTOS_CURSO = URL_C +"/obtener_radicados.php";
-    public static final String INSERT_EVENTOS_CURSO = URL_C +"/insertar_radicado.php";
+    public static final String INSERT_NUEVO_EVENTO = URL_C+"/insertar_radicado_y_desaeventos.php";
     public static final String RESPUESTAS_UNIDADES = URL_C +"/RespuestasUnidades.php";
 
     //NOTIFICACIONES
