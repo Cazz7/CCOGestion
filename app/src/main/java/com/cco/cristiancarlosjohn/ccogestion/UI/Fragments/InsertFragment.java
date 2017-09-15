@@ -93,7 +93,7 @@ public class InsertFragment extends Fragment {
                     }
 
                     private void validarnotificaciones() {
-                        String prueba = "hoña";
+                        String prueba = "hodsafsdfa";
                         // where we will store or remove selected items
                         final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
                         //Obtengo String del array unidades_operacion
