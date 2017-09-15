@@ -77,7 +77,7 @@
     <string name="TTO_RIONEGRO">TTO_RIONEGRO</string>
     <string name="CONCESION">CONCESIÓN</string>
 
-    <!--Acciones-->
+    <!--Accion-->
     <string name="accion_aceptar">ACEPTAR</string>
     <string name="accion_llegar">LLEGAR</string>
     <string name="accion_disponible">DISPONIBLE</string>
