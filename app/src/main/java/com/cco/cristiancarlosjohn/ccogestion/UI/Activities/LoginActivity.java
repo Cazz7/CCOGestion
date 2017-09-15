@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveOnPreferences(String usuario, String password, String perfil) {
         if (switchRemember.isChecked()) {
             SharedPreferences.Editor editor = prefs.edit();
+            //TODO: Crear un método para obtener el perfil
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
             editor.putString("perfil", perfil);

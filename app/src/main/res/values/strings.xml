@@ -45,6 +45,19 @@
         <item>PEV</item>
     </string-array>
 
+    <!--Unidades a las que se le notificará en la respuesta-->
+    <string-array name="unidades_not">
+        <item>AMBULANCIA</item>
+        <item>DITRA</item>
+        <item>GRUA</item>
+        <item>CUADRILLA_MTTO_VP_Y_SE</item>
+        <item>CUADRILLA_MTTO_DC</item>
+        <item>TTO_MEDELIN</item>
+        <item>TTO_ENVIGADO</item>
+        <item>TTO_RIONEGRO</item>
+        <item>CONCESIÓN</item>
+    </string-array>
+
     <!-- Vias-->
     <string-array name="entradas_Vias">
         <item>VARIANTE LAS PALMAS</item>
@@ -71,5 +84,10 @@
     <string name="observacion_parte1">Informa Usuario:\u0020</string>
     <string name="observacion_parte2">que\u0020</string>
     <string name="observacion_parte3">desde</string>
+    <string name="notificar_a">Notificar a:</string>
+    <string name="send">Enviar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="seleccionar_ubicacion">Ingrese ubicación</string>
+    <string name="ubicación">Ubicación</string>
 
 </resources>

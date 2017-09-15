@@ -1,12 +1,16 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -14,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,20 +27,23 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.LocationDialogFragment;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
-public class ConfirmActivity extends AppCompatActivity {
+public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
     SharedPreferences prefs;
+    ArrayList mUnidSelecciondas;
 
     //Componentes UI
     Toolbar toolbar;
@@ -112,7 +120,7 @@ public class ConfirmActivity extends AppCompatActivity {
         switch ( v.getId() ){
             case R.id.btnAceptarEvento:
                 accion = getResources().getString(R.string.accion_aceptar);
-                createVolleyRequest(accion);
+                DisplayLocationDialog(accion);
                 break;
             case R.id.btnLlegarEvento:
                 accion = getResources().getString(R.string.accion_llegar);
@@ -129,6 +137,19 @@ public class ConfirmActivity extends AppCompatActivity {
 
     }
 
+    private void DisplayLocationDialog(String accion) {
+
+        showAlertDialog();
+        //createVolleyRequest(accion); //TODO: agregar luego el evento http
+    }
+
+    private void showAlertDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        LocationDialogFragment alertDialog = LocationDialogFragment.newInstance("Some title");
+        alertDialog.show(fm, "fragment_alert");
+
+    }
+
     private void createVolleyRequest(String accion) {
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
@@ -139,10 +160,10 @@ public class ConfirmActivity extends AppCompatActivity {
         map.put(Constantes.COD_EVENTO2, tvCodigo.getText().toString());
         map.put(Constantes.SUB_EVENTO, "");
         map.put(Constantes.OBSERVACIONES, observacion);
-        map.put(Constantes.ESTADO, "ABIERTO"); //TODO: Mirar este estado de donde se obtiene
+        map.put(Constantes.ESTADO, "ABIERTO");
         map.put(Constantes.USUARIO, Preferences.getUserPrefs(prefs));
-        map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo()); //TODO: Cúal es esta fecha ?
-        map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Obtener estos perfiles para notificar
+        map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo());
+        map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Pendiente: Notificará al GESTION_VIAL y Mismo perfil
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
         map.put(Constantes.UNIDAD, Preferences.getUserProfilePrefs(prefs));
 
@@ -228,5 +249,12 @@ public class ConfirmActivity extends AppCompatActivity {
     }
 
     private void procesarRespuesta(JSONObject response) {
+    }
+
+
+    @Override
+    public void onComplete(String time) {
+        Toast.makeText(this, "Hi, " + time, Toast.LENGTH_SHORT).show();
+
     }
 }
