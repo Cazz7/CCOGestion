@@ -93,6 +93,7 @@ public class InsertFragment extends Fragment {
                     }
 
                     private void validarnotificaciones() {
+                        String prueba = "hoña";
                         // where we will store or remove selected items
                         final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
                         //Obtengo String del array unidades_operacion
@@ -105,8 +106,8 @@ public class InsertFragment extends Fragment {
                                 // specify the list array, the items to be selected by default (null for none),
                                 // and the listener through which to receive call backs when items are selected
                                 // R.array.choices were set in the resources res/values/strings.xml
-                                // Prueba
-                                // Prueba2
+
+
                                 .setMultiChoiceItems(R.array.unidades_operacion, null, new DialogInterface.OnMultiChoiceClickListener() {
 
                                     @Override
