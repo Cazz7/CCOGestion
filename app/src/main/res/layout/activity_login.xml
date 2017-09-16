@@ -10,35 +10,72 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.LoginActivity">
 
-    <EditText
-        android:id="@+id/editTextUser"
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:id="@+id/ivLogoCCG"
+        android:src="@drawable/notification_icon2"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/ll_etTextUser"
+        android:layout_alignStart="@+id/ll_etTextUser"
+        android:layout_alignRight="@+id/ll_etTextUser"
+        android:layout_alignEnd="@+id/ll_etTextUser" />
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
-        android:ems="10"
-        android:hint="Usuario"/>
+        android:orientation="horizontal"
+        android:id="@+id/ll_etTextUser"
+        android:layout_below="@+id/ivLogoCCG"
+        android:layout_marginTop="200dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_user"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextUser"
+            android:ems="10"
+            android:hint="Usuario"
+            />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextPassword"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:orientation="horizontal"
         android:layout_marginTop="12dp"
-        android:layout_below="@+id/editTextUser"
-        android:layout_alignLeft="@+id/editTextUser"
-        android:layout_alignStart="@+id/editTextUser" />
+        android:id="@+id/ll_etTextPassword"
+        android:layout_below="@+id/ll_etTextUser"
+        android:layout_alignLeft="@+id/ll_etTextUser"
+        android:layout_alignStart="@+id/ll_etTextUser">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_key" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Password"
+            />
+    </LinearLayout>
 
     <Switch
         android:id="@+id/switchRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTextPassword"
-        android:layout_alignRight="@+id/editTextPassword"
-        android:layout_below="@+id/editTextPassword"
+        android:layout_alignEnd="@+id/ll_etTextPassword"
+        android:layout_alignRight="@+id/ll_etTextPassword"
+        android:layout_below="@+id/ll_etTextPassword"
         android:layout_marginTop="13dp"
         android:text="Recordarme" />
 
@@ -57,11 +94,10 @@
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/switchRemember"
-        android:layout_alignLeft="@+id/editTextPassword"
-        android:layout_alignRight="@+id/switchRemember"
-        android:layout_alignStart="@+id/editTextPassword"
         android:layout_below="@+id/switchRemember"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_marginTop="24dp"
         android:background="@color/primary"
         android:text="CONECTARSE"
