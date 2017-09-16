@@ -36,6 +36,11 @@ import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
     UserDBHelper dbUsers;
+    String accion; //Acción que realiza el usuario al dar clic
+    String radicado;
+    String codigo;
+    String via;
+    String sector;
 
     //Componentes UI
     Toolbar toolbar;
@@ -65,34 +70,6 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         });
     }
 
-    public static void launch(Activity activity, String idradicado, String cod_evento, String via, String kilo_sector) {
-        Intent intent = getLaunchIntent(activity, idradicado, cod_evento, via, kilo_sector);
-        activity.startActivity(intent);
-    }
-
-    public static Intent getLaunchIntent(Context context, String idradicado, String cod_evento, String via, String kilo_sector) {
-        Intent i = new Intent(context, ConfirmActivity.class);
-        i.putExtra(Constantes.RADICADO, idradicado);
-        i.putExtra(Constantes.COD_EVENTO, cod_evento);
-        i.putExtra(Constantes.VIA, via);
-        i.putExtra(Constantes.SECTOR, kilo_sector);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return i;
-    }
-
-    private void readNotification() {
-        Intent intent = getIntent();
-        String radicado = intent.getStringExtra(Constantes.RADICADO);
-        String codigo = intent.getStringExtra(Constantes.COD_EVENTO);
-        String via = intent.getStringExtra(Constantes.VIA);
-        String sector = intent.getStringExtra(Constantes.SECTOR);
-
-        tvRadicado.setText(" " + radicado);
-        tvCodigo.setText(" " + codigo);
-        tvVia.setText(" " + via);
-        tvSector.setText(" " + sector);
-    }
-
     private void bindUI() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvRadicado = (TextView)findViewById(R.id.tvRadicado);
@@ -106,21 +83,49 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         fabHome = (FloatingActionButton) findViewById(fab);
     }
 
+    public static void launch(Activity activity, String idradicado, String cod_evento, String via, String kilo_sector) {
+        Intent intent = getLaunchIntent(activity, idradicado, cod_evento, via, kilo_sector);
+        activity.startActivity(intent);
+    }
+
+
+    public static Intent getLaunchIntent(Context context, String idradicado, String cod_evento, String via, String kilo_sector) {
+        Intent i = new Intent(context, ConfirmActivity.class);
+        i.putExtra(Constantes.RADICADO, idradicado);
+        i.putExtra(Constantes.COD_EVENTO, cod_evento);
+        i.putExtra(Constantes.VIA, via);
+        i.putExtra(Constantes.SECTOR, kilo_sector);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return i;
+    }
+
+    private void readNotification() {
+        Intent intent = getIntent();
+        radicado = intent.getStringExtra(Constantes.RADICADO);
+        codigo = intent.getStringExtra(Constantes.COD_EVENTO);
+        via = intent.getStringExtra(Constantes.VIA);
+        sector = intent.getStringExtra(Constantes.SECTOR);
+
+        tvRadicado.setText(" " + radicado);
+        tvCodigo.setText(" " + codigo);
+        tvVia.setText(" " + via);
+        tvSector.setText(" " + sector);
+    }
+
     public void onAction(View v)
     {
-        String accion;
         switch ( v.getId() ){
             case R.id.btnAceptarEvento:
                 accion = getResources().getString(R.string.accion_aceptar);
-                DisplayLocationDialog(accion);
+                DisplayLocationDialog();
                 break;
             case R.id.btnLlegarEvento:
                 accion = getResources().getString(R.string.accion_llegar);
-                createVolleyRequest(accion);
+                DisplayLocationDialog();
                 break;
             case R.id.btnSuperarEvento:
                 accion = getResources().getString(R.string.accion_disponible);
-                createVolleyRequest(accion);
+                DisplayLocationDialog();
                 break;
             default:
                 break;
@@ -129,33 +134,36 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
     }
 
-    private void DisplayLocationDialog(String accion) {
-
+    private void DisplayLocationDialog() {
         showAlertDialog();
-        //createVolleyRequest(accion); //TODO: agregar luego el evento http
     }
 
     private void showAlertDialog() {
         FragmentManager fm = getSupportFragmentManager();
         LocationDialogFragment alertDialog = LocationDialogFragment.newInstance("Some title");
         alertDialog.show(fm, "fragment_alert");
-
     }
 
-    private void createVolleyRequest(String accion) {
+    @Override
+    //Respuesta de la elección
+    public void onComplete(String ubicacion) {
+        createVolleyRequest(ubicacion);
+    }
+
+    private void createVolleyRequest(String ubicacion) {
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
-        String observacion = obtenerObservaciones(accion);
+        String observacion = obtenerObservaciones(accion,ubicacion);
         //Elementos a enviar a la request php
-        map.put(Constantes.IDRADICADO, tvRadicado.getText().toString());
+        map.put(Constantes.IDRADICADO, radicado);
         map.put(Constantes.FECHA_CREACION, ObtenerTiempo());
-        map.put(Constantes.COD_EVENTO2, tvCodigo.getText().toString());
+        map.put(Constantes.COD_EVENTO2, codigo);
         map.put(Constantes.SUB_EVENTO, "");
         map.put(Constantes.OBSERVACIONES, observacion);
         map.put(Constantes.ESTADO, "ABIERTO");
         map.put(Constantes.USUARIO, dbUsers.getUser());
         map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo());
-        map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Pendiente: Notificará al GESTION_VIAL y Mismo perfil
+        map.put(Constantes.PERFILES_NOTI, "GESTION VIAL," + dbUsers.getProfile());
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
         map.put(Constantes.UNIDAD, dbUsers.getProfile());
 
@@ -202,13 +210,12 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
             );
     }
 
-    private String obtenerObservaciones(String accion) {
+    private String obtenerObservaciones(String accion, String ubicacion) {
 
         String parte1 = getResources().getString(R.string.observacion_parte1);
         String parte2 = getResources().getString(R.string.observacion_parte2);
         String parte3 = getResources().getString(R.string.observacion_parte3);
-        String tarea = accion; //TODO: Obtener la acción paramétrica
-        String ubicacion = "Peaje palmas"; //TODO: Crear alert dialog para la ubicación
+        String tarea = accion;
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
@@ -243,12 +250,5 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     private void procesarRespuesta(JSONObject response) {
 
         //TODO: Procesar respuesta
-    }
-
-
-    @Override
-    public void onComplete(String time) {
-        Toast.makeText(this, "Hi, " + time, Toast.LENGTH_SHORT).show();
-
     }
 }
