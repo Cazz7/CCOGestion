@@ -280,7 +280,7 @@ public class InsertFragment extends Fragment {
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(
                 new JsonObjectRequest(
                         Request.Method.POST,
-                        Constantes.INSERT_EVENTOS_CURSO,
+                        Constantes.INSERT_NUEVO_EVENTO,
                         jobject,
                         new Response.Listener<JSONObject>() {
                             @Override
