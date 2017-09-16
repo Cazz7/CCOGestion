@@ -2,8 +2,14 @@ package com.cco.cristiancarlosjohn.ccogestion.UI.Fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONException;
@@ -41,13 +49,15 @@ public class InsertFragment extends Fragment {
      */
     private static final String TAG = InsertFragment.class.getSimpleName();
     public String notificacion_unidades;
+    SharedPreferences prefs;
     Constantes contantes=new Constantes();
     /*
     Controles
     */
-    EditText kiloSector_input, Nombre_Reporta_input, Contacto_input, Observaciones_input;
+    EditText kiloSector_input, Nombre_Reporta_input, Contacto_input, Observaciones_input, fecha_editext, hora_editext;
     Spinner Cod_Evento_spinner, Via_spinner;
-    TextView fecha_text, Notificaciones_text;
+    TextView fecha_text;
+    private  int hora, minutos;
 
 
 
@@ -72,95 +82,26 @@ public class InsertFragment extends Fragment {
         kiloSector_input = (EditText) v.findViewById(R.id.kiloSector_input);
         Nombre_Reporta_input = (EditText) v.findViewById(R.id.Nombre_Reporta_input);
         Contacto_input = (EditText) v.findViewById(R.id.Contacto_input);
-        fecha_text = (TextView) v.findViewById(R.id.fecha_ejemplo_text);
+        fecha_editext = (EditText) v.findViewById(R.id.fecha_editext);
+        hora_editext = (EditText) v.findViewById(R.id.hora_editext);
         Cod_Evento_spinner = (Spinner) v.findViewById(R.id.Cod_Evento_spinner);
         Via_spinner = (Spinner) v.findViewById(R.id.Via_spinner);
         Observaciones_input = (EditText) v.findViewById(R.id.Observaciones_input);
-        Notificaciones_text = (TextView) v.findViewById(R.id.Notificaciones_texto);
+
+        prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+
 
         //Obtener fecha y hora actual
-        java.util.Date fechaActual=new java.util.Date();
-        DateFormat formatofechas = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        fecha_text.setText(formatofechas.format(fechaActual));
-
-        Notificaciones_text.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // DialogFragment picker = new DatePickerFragment();
-                        // picker.show(getFragmentManager(), "datePicker");
-                        validarnotificaciones();
-                    }
-
-                    private void validarnotificaciones() {
-                        // where we will store or remove selected items
-                        final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
-                        //Obtengo String del array unidades_operacion
-                        final String[] unidades_operacion_String = getResources().getStringArray(R.array.unidades_operacion);
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-                        // set the dialog title
-                        builder.setTitle("Seleccione unidades a notificar")
-                                // specify the list array, the items to be selected by default (null for none),
-                                // and the listener through which to receive call backs when items are selected
-                                // R.array.choices were set in the resources res/values/strings.xml
-
-
-                                .setMultiChoiceItems(R.array.unidades_operacion, null, new DialogInterface.OnMultiChoiceClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
-                                        if (isChecked) {
-                                            // if the user checked the item, add it to the selected items
-                                            mSelectedItems.add(which);
-                                        }
-
-                                        else if (mSelectedItems.contains(which)) {
-                                            // else if the item is already in the array, remove it
-                                            mSelectedItems.remove(Integer.valueOf(which));
-                                        }
-                                    }
-
-                                })
-
-                                // Set the action buttons
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int id) {
-
-                                        // user clicked OK, so save the mSelectedItems results somewhere
-                                        // here we are trying to retrieve the selected items indices
-                                        notificacion_unidades = "GESTION_VIAL";
-                                        for(Integer i : mSelectedItems){
-                                            notificacion_unidades +=","+unidades_operacion_String[i];
-                                        }
-                                        Toast.makeText(
-                                                getActivity(),
-                                                "NOTIFICACION: " + notificacion_unidades,
-                                                Toast.LENGTH_LONG).show();
-
-
-                                    }
-                                })
-
-                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // removes the AlertDialog in the screen
-                                    }
-                                })
-
-                                .show();
-                    }
-                }
-
-        );
+        java.util.Date fechaActual = new java.util.Date();
+        DateFormat formatofechas = new SimpleDateFormat("yyyy/MM/dd");
+        fecha_editext.setText(formatofechas.format(fechaActual));
+        java.util.Date horaActual = new java.util.Date();
+        DateFormat formatohoras = new SimpleDateFormat("HH:mm");
+        hora_editext.setText(formatohoras.format(horaActual));
 
         //llamada DatePickerFragment
 
-       /* fecha_text.setOnClickListener(
+       fecha_editext.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -169,14 +110,104 @@ public class InsertFragment extends Fragment {
 
                     }
                 }
-        );*/
+        );
 
-        return v;
+        //llamada TimePickerDialog
+
+        hora_editext.setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        if (selectedMinute<10) {
+                            hora_editext.setText(selectedHour + ":0" + selectedMinute);
+                        } else {
+                            hora_editext.setText(selectedHour + ":" + selectedMinute);
+                        }
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Seleccione hora");
+                mTimePicker.show();
+
+            }
+        });
+    return  v;
     }
 
-    private void showDialogNotificaciones(){
 
-    }
+
+    private void validarnotificaciones() {
+            // where we will store or remove selected items
+            final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
+            //Obtengo String del array unidades_operacion
+            final String[] unidades_operacion_String = getResources().getStringArray(R.array.unidades_operacion);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            // set the dialog title
+            builder.setTitle("Seleccione unidades a notificar")
+                    // specify the list array, the items to be selected by default (null for none),
+                    // and the listener through which to receive call backs when items are selected
+                    // R.array.choices were set in the resources res/values/strings.xml
+
+
+                    .setMultiChoiceItems(R.array.unidades_operacion, null, new DialogInterface.OnMultiChoiceClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                            if (isChecked) {
+                                // if the user checked the item, add it to the selected items
+                                mSelectedItems.add(which);
+                            }
+
+                            else if (mSelectedItems.contains(which)) {
+                                // else if the item is already in the array, remove it
+                                mSelectedItems.remove(Integer.valueOf(which));
+                            }
+                        }
+
+                    })
+
+                    // Set the action buttons
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            // user clicked OK, so save the mSelectedItems results somewhere
+                            // here we are trying to retrieve the selected items indices
+                            notificacion_unidades = "GESTION_VIAL";
+                            for(Integer i : mSelectedItems){
+                                notificacion_unidades +=","+unidades_operacion_String[i];
+                            }
+                            Toast.makeText(
+                                    getActivity(),
+                                    "NOTIFICACION: " + notificacion_unidades,
+                                    Toast.LENGTH_LONG).show();
+
+                            guardarNuevoEvento();
+                        }
+                    })
+
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // removes the AlertDialog in the screen
+                        }
+                    })
+
+                    .show();
+        }
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -191,7 +222,8 @@ public class InsertFragment extends Fragment {
         switch (id) {
             case android.R.id.home:// CONFIRMAR
                 if (!camposVacios()) {
-                    guardarNuevoEvento();
+                    validarnotificaciones();
+
                 }
                 else
                     Toast.makeText(
@@ -212,21 +244,23 @@ public class InsertFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     private void notificar() {
         final String Cod_Evento = Cod_Evento_spinner.getSelectedItem().toString();
         final String Via = Via_spinner.getSelectedItem().toString();
         final String kiloSector = kiloSector_input.getText().toString();
-        final String Fecha = fecha_text.getText().toString();
+        //final String Fecha = fecha_text.getText().toString();
 
         String Radicado = contantes.getRadicado();
 
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
-        map.put(Constantes.PERFILES, notificacion_unidades);
-        map.put(Constantes.RADICADO, Radicado);
-        map.put(Constantes.COD_EVENTO, Cod_Evento);
-        map.put(Constantes.VIA, Via);
-        map.put(Constantes.SECTOR, kiloSector);
+        map.put("perfiles", notificacion_unidades);
+        map.put("idradicado", Radicado);
+        map.put("cod_evento", Cod_Evento);
+        map.put("via", Via);
+        map.put("kilo_sector", kiloSector);
 
 
         JSONObject jobject = new JSONObject(map);
@@ -286,7 +320,8 @@ public class InsertFragment extends Fragment {
         final String Nombre_Reporta = Nombre_Reporta_input.getText().toString();
         final String Contacto = Contacto_input.getText().toString();
         final String kiloSector = kiloSector_input.getText().toString();
-        final String Fecha = fecha_text.getText().toString();
+        final String Fecha = fecha_editext.getText().toString();
+        final String hora = hora_editext.getText().toString();
         final String Cod_Evento = Cod_Evento_spinner.getSelectedItem().toString();
         final String Via = Via_spinner.getSelectedItem().toString();
         final String Observaciones = Observaciones_input.getText().toString();
@@ -294,12 +329,12 @@ public class InsertFragment extends Fragment {
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
         map.put("Cod_Evento", Cod_Evento);
-        map.put("Fecha_Creacion", Fecha);
+        map.put("Fecha_Creacion", Fecha+" "+hora);
         map.put("Via", Via);
         map.put("kiloSector", kiloSector);
         map.put("kilometro", "");
         map.put("Estado", "ABIERTO");
-        map.put("Usuario", "CCORTINEZ");
+        map.put("Usuario", Preferences.getUserPrefs(prefs));
         map.put("Nombre", Nombre_Reporta);
         map.put("Contacto", Contacto);
         map.put("FechaCierreEvento", Fecha);
@@ -437,13 +472,7 @@ public class InsertFragment extends Fragment {
 
     }
 
-    /**
-     * Valida si los campos {@lin titulo_input} y {@lin descripcion_input}
-     * se han rellenado
-     *
-     * @return true si alguno o dos de los campos están vacios, false si ambos
-     * están completos
-     */
+
     public boolean camposVacios() {
         // String titulo = titulo_input.getText().toString();
         //String descripcion = descripcion_input.getText().toString();
@@ -461,7 +490,7 @@ public class InsertFragment extends Fragment {
      */
     public void actualizarFecha(int ano, int mes, int dia) {
         // Setear en el textview la fecha
-        fecha_text.setText(ano + "-" + (mes + 1) + "-" + dia);
+        fecha_editext.setText(ano + "-" + (mes + 1) + "-" + dia);
     }
 
     /**
