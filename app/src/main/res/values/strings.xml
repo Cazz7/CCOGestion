@@ -103,4 +103,7 @@
     <string name="seleccionar_ubicacion">Ingrese ubicación</string>
     <string name="ubicación">Ubicación</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

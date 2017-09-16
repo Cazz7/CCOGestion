@@ -1,10 +1,6 @@
 package com.cco.cristiancarlosjohn.ccogestion.Tools;
 
-/**
- * Clase que contiene los códigos usados en "I Wish" para
- * mantener la integridad en las interacciones entre actividades
- * y fragmentos
- */
+
 public class Constantes {
 
     public String Radicado;
