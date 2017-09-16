@@ -241,6 +241,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     }
 
     private void procesarRespuesta(JSONObject response) {
+
+        //TODO: Procesar respuesta
     }
 
 
