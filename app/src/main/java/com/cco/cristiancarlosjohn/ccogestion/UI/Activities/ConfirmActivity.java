@@ -173,7 +173,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    // Procesar la respuesta del servidor
+                                    // Procesar la respuesta
                                     procesarRespuesta(response);
                                 }
                             },
