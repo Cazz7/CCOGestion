@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -19,25 +18,23 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
-import com.cco.cristiancarlosjohn.ccogestion.Tools.MyApp;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
-import com.cco.cristiancarlosjohn.ccogestion.WEB.FirebaseInstanceIDService;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
+    UserDBHelper dbUsers;    //Base de datos de usuarios
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText editTextUsuario;
@@ -55,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         bindUI();// Declaración de elementos del layout
+        dbUsers = new UserDBHelper(this);
         prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         setCredentialsIfExist(); //Ingresa los datos del login
 
@@ -214,9 +212,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveUserData(String usuarioOK, String passwordOK, String perfil) {
-        DatosUsuario.setUsuario(usuarioOK);
-        DatosUsuario.setPassword(passwordOK);
-        DatosUsuario.setPerfil(perfil);
-        MyApp.setPerfil(perfil);
+        dbUsers.insertUser(usuarioOK,perfil);
     }
 }

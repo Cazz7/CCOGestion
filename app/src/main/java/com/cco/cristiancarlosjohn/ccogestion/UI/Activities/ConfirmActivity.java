@@ -1,17 +1,13 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +18,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
-import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.LocationDialogFragment;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
@@ -41,7 +35,7 @@ import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
-    ArrayList mUnidSelecciondas;
+    UserDBHelper dbUsers;
 
     //Componentes UI
     Toolbar toolbar;
@@ -57,6 +51,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         bindUI();
 
         setSupportActionBar(toolbar);
+        dbUsers = new UserDBHelper(this);
 
         readNotification();
 
@@ -158,11 +153,11 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         map.put(Constantes.SUB_EVENTO, "");
         map.put(Constantes.OBSERVACIONES, observacion);
         map.put(Constantes.ESTADO, "ABIERTO");
-        map.put(Constantes.USUARIO, DatosUsuario.getUsuario());//TODO: Hacer esto con bases de datos
+        map.put(Constantes.USUARIO, dbUsers.getUser());
         map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo());
         map.put(Constantes.PERFILES_NOTI, "AMBULANCIA"); //TODO: Pendiente: Notificará al GESTION_VIAL y Mismo perfil
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
-        map.put(Constantes.UNIDAD, DatosUsuario.getPerfil());//TODO: Hacer esto con bases de datos
+        map.put(Constantes.UNIDAD, dbUsers.getProfile());
 
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
@@ -217,8 +212,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
-                        DatosUsuario.getUsuario() + " " +
-                        DatosUsuario.getPerfil() + " " +
+                        "CAZZ" + " " + //TODO: Usar db
+                        "DITRA" + " " +
                         parte2 + " " +
                         tarea + " " +
                         parte3 + " " +

@@ -25,7 +25,7 @@ public class UserDataBase {
             "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
                     FeedEntry._ID + " INTEGER PRIMARY KEY," +
                     FeedEntry.COLUMN_NAME_USER + " TEXT unique," +
-                    FeedEntry.COLUMN_NAME_PASS + TEXT_TYPE + COMMA_SEP +
+                    //FeedEntry.COLUMN_NAME_PASS + TEXT_TYPE + COMMA_SEP +
                     FeedEntry.COLUMN_NAME_PROFILE + TEXT_TYPE + " )";
 
     public static final String SQL_DELETE_ENTRIES =

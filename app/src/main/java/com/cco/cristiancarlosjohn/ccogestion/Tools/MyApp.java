@@ -9,15 +9,6 @@ import android.os.SystemClock;
 
 public class MyApp extends Application {
 
-    private static String Perfil;
-
-    public static String getPerfil() {
-        return Perfil;
-    }
-
-    public static void setPerfil(String perfil) {
-        Perfil = perfil;
-    }
 
     @Override
     public void onCreate() {

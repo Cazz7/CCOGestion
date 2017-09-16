@@ -19,10 +19,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cco.cristiancarlosjohn.ccogestion.Model.DatosUsuario;
 import com.cco.cristiancarlosjohn.ccogestion.Model.Radicados;
+import com.cco.cristiancarlosjohn.ccogestion.Model.UserDataBase;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.MyApp;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertActivity;
@@ -54,6 +55,9 @@ public class MainFragment extends Fragment {
     FloatingActionButton fabAdd;
     private Gson gson = new Gson();
 
+    //Base de datos de usuarios
+    UserDBHelper dbUsers;
+
     public MainFragment() {
     }
 
@@ -66,6 +70,8 @@ public class MainFragment extends Fragment {
         lista = (RecyclerView) v.findViewById(R.id.recRadNotif);
         lista.setHasFixedSize(true);
 
+        dbUsers = new UserDBHelper(getActivity());
+
         // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(getActivity());
         lista.setLayoutManager(lManager);
@@ -74,12 +80,7 @@ public class MainFragment extends Fragment {
         cargarAdaptador();
 
         //Se obtiene el perfil
-        //SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-        String perfil = DatosUsuario.getPerfil();//TODO: Hacer esto con bases de datos
-        Toast.makeText(
-                getActivity(),
-                perfil,
-                Toast.LENGTH_LONG).show();//TODO: Eliminar este toast es solo para pruebas
+        String perfil = dbUsers.getProfile();
 
         // Obtener instancia del FAB
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabAdd);
