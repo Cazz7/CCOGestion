@@ -212,8 +212,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
-                        "CAZZ" + " " + //TODO: Usar db
-                        "DITRA" + " " +
+                        dbUsers.getUser() + " " +
+                        dbUsers.getProfile() + " " +
                         parte2 + " " +
                         tarea + " " +
                         parte3 + " " +
