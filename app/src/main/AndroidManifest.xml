@@ -15,15 +15,20 @@
         <!-- Actividad Splash -->
         <activity
             android:name=".UI.Activities.SplashActivity"
-            android:theme="@style/SplashScreen">
+            android:theme="@style/SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activities.MainActivity" />
-        <activity android:name=".UI.Activities.LoginActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".UI.Activities.MainActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".UI.Activities.LoginActivity" />
 
         <!-- Firebase -->
         <service android:name=".WEB.FirebaseMessagingService">
@@ -42,12 +47,14 @@
         <activity
             android:name=".UI.Activities.ConfirmActivity"
             android:label="@string/title_activity_confirmation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <!-- Actividad Insertar -->
         <activity
             android:name=".UI.Activities.InsertActivity"
             android:label="@string/title_activity_insert"
-            android:parentActivityName=".UI.Activities.MainActivity">
+            android:parentActivityName=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
