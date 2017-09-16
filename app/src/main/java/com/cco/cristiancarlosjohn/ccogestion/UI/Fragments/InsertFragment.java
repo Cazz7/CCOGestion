@@ -76,15 +76,15 @@ public class InsertFragment extends Fragment {
         Via_spinner = (Spinner) v.findViewById(R.id.Via_spinner);
         Observaciones_input = (EditText) v.findViewById(R.id.Observaciones_input);
         Notificaciones_text = (TextView) v.findViewById(R.id.Notificaciones_texto);
-        DITRA_checkbox = (CheckBox) v.findViewById(R.id.DITRA_checkbox);
-        AMBULANCIA_checkbox= (CheckBox) v.findViewById(R.id.AMBULANCIA_checkbox);
-        GRUA_checkbox = (CheckBox) v.findViewById(R.id.GRUA_checkbox);
-        CUADRILLA_MTTO_VP_Y_SE_checkbox= (CheckBox) v.findViewById(R.id.CUADRILLA_MTTO_VP_Y_SE_checkbox);
-        CUADRILLA_MTTO_DC_checkbox= (CheckBox) v.findViewById(R.id.CUADRILLA_MTTO_DC_checkbox);
-        CONCESION_checkbox = (CheckBox) v.findViewById(R.id.CONCESION_checkbox);
-        TTO_MEDELLIN_checkbox = (CheckBox) v.findViewById(R.id.TTO_MEDELLIN_checkbox);
-        TTO_ENVIGADO_checkbox = (CheckBox) v.findViewById(R.id.TTO_ENVIGADO_checkbox);
-        TTO_RIONEGRO_checkbox = (CheckBox) v.findViewById(R.id.TTO_RIONEGRO_checkbox);
+//        DITRA_checkbox = (CheckBox) v.findViewById(R.id.DITRA_checkbox);
+//        AMBULANCIA_checkbox= (CheckBox) v.findViewById(R.id.AMBULANCIA_checkbox);
+//        GRUA_checkbox = (CheckBox) v.findViewById(R.id.GRUA_checkbox);
+//        CUADRILLA_MTTO_VP_Y_SE_checkbox= (CheckBox) v.findViewById(R.id.CUADRILLA_MTTO_VP_Y_SE_checkbox);
+//        CUADRILLA_MTTO_DC_checkbox= (CheckBox) v.findViewById(R.id.CUADRILLA_MTTO_DC_checkbox);
+//        CONCESION_checkbox = (CheckBox) v.findViewById(R.id.CONCESION_checkbox);
+//        TTO_MEDELLIN_checkbox = (CheckBox) v.findViewById(R.id.TTO_MEDELLIN_checkbox);
+//        TTO_ENVIGADO_checkbox = (CheckBox) v.findViewById(R.id.TTO_ENVIGADO_checkbox);
+//        TTO_RIONEGRO_checkbox = (CheckBox) v.findViewById(R.id.TTO_RIONEGRO_checkbox);
 
         //Obtener fecha y hora actual
         java.util.Date fechaActual=new java.util.Date();

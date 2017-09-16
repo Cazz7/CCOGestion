@@ -35,7 +35,6 @@ public class Constantes {
 
     //Constantes - by Carlos Cortinez
     public static final int CODIGO_DETALLE = 100;
-    public static final int CODIGO_ACTUALIZACION = 101;
 
     //CARLOS
     //URLs del Web Service
