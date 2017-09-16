@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -21,21 +20,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
-import com.cco.cristiancarlosjohn.ccogestion.WEB.FirebaseInstanceIDService;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
+    UserDBHelper dbUsers;    //Base de datos de usuarios
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText editTextUsuario;
@@ -53,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         bindUI();// Declaración de elementos del layout
+        dbUsers = new UserDBHelper(this);
         prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         setCredentialsIfExist(); //Ingresa los datos del login
 
@@ -77,12 +77,9 @@ public class LoginActivity extends AppCompatActivity {
     private void saveOnPreferences(String usuario, String password, String perfil) {
         if (switchRemember.isChecked()) {
             SharedPreferences.Editor editor = prefs.edit();
+            //TODO: Crear un método para obtener el perfil
             editor.putString("usuario", usuario);
             editor.putString("pass", password);
-            editor.putString("perfil", perfil);
-            editor.apply();
-        }else{
-            SharedPreferences.Editor editor = prefs.edit();
             editor.putString("perfil", perfil);
             editor.apply();
         }
@@ -202,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
             String estado = response.getString("estado");
             if (estado.equals("1")) {
                 String perfil = response.getString("perfil");
+                saveUserData(usuarioOK, passwordOK, perfil);
                 saveOnPreferences(usuarioOK, passwordOK, perfil);
                 goToMain(perfil);
             } else {
@@ -211,5 +209,9 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveUserData(String usuarioOK, String passwordOK, String perfil) {
+        dbUsers.insertUser(usuarioOK,perfil);
     }
 }

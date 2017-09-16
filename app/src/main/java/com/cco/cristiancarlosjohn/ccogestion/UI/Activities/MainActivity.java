@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_logout:
+            case R.id.action_logout://TODO: Crear un servicio que borre el token cuando se desconecten
                 goToLogin();
                 return true;
             default:

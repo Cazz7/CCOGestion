@@ -20,8 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.Model.Radicados;
+import com.cco.cristiancarlosjohn.ccogestion.Model.UserDataBase;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.MyApp;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Preferences;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertActivity;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Adapters.RadicadosAdapter;
@@ -36,31 +39,24 @@ import java.util.Arrays;
 
 public class MainFragment extends Fragment {
 
-    /*
-    Etiqueta de depuracion
-     */
+    //Etiqueta de depuracion
     private static final String TAG = MainFragment.class.getSimpleName();
 
-    /*
-    Adaptador del recycler view
-     */
+    //Adaptador del recycler view
     private RadicadosAdapter adapter;
 
-    /*
-    Instancia global del recycler view
-     */
+    //Instancia global del recycler view
     private RecyclerView lista;
 
-    /*
-    instancia global del administrador
-     */
+    //instancia global del administrador
     private RecyclerView.LayoutManager lManager;
 
-    /*
-    Instancia global del FAB
-     */
+    //Instancia global del FAB
     FloatingActionButton fabAdd;
     private Gson gson = new Gson();
+
+    //Base de datos de usuarios
+    UserDBHelper dbUsers;
 
     public MainFragment() {
     }
@@ -74,6 +70,8 @@ public class MainFragment extends Fragment {
         lista = (RecyclerView) v.findViewById(R.id.recRadNotif);
         lista.setHasFixedSize(true);
 
+        dbUsers = new UserDBHelper(getActivity());
+
         // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(getActivity());
         lista.setLayoutManager(lManager);
@@ -82,8 +80,7 @@ public class MainFragment extends Fragment {
         cargarAdaptador();
 
         //Se obtiene el perfil
-        SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-        String perfil = Preferences.getUserProfilePrefs(prefs);
+        String perfil = dbUsers.getProfile();
 
         // Obtener instancia del FAB
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabAdd);
