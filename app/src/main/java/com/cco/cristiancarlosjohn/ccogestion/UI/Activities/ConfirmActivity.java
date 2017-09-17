@@ -8,12 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.internal.Util;
 
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
@@ -147,7 +151,9 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     @Override
     //Respuesta de la elección
     public void onComplete(String ubicacion) {
-        createVolleyRequest(ubicacion);
+        if( !ubicacion.isEmpty() && ubicacion != null){
+            createVolleyRequest(ubicacion);
+        }
     }
 
     private void createVolleyRequest(String ubicacion) {
@@ -166,6 +172,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         map.put(Constantes.PERFILES_NOTI, "GESTION VIAL," + dbUsers.getProfile());
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
         map.put(Constantes.UNIDAD, dbUsers.getProfile());
+        map.put(Constantes.VIA, via);
 
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
@@ -173,41 +180,48 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         // Depurando objeto Json...
         Log.d("json_confirm", jobject.toString());
 
-            VolleySingleton.getInstance(this).addToRequestQueue(
-                    new JsonObjectRequest(
-                            Request.Method.POST,
-                            Constantes.RESPUESTAS_UNIDADES,
-                            jobject,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    // Procesar la respuesta del servidor
-                                    procesarRespuesta(response);
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.d("error_volley", "Error Volley: " + error.getMessage());
-                                }
-                            }
+        JsonObjectRequest request =  buildRequest(jobject);
 
-                    )
-                    {
-                        @Override
-                        public Map<String, String> getHeaders() {
-                            Map<String, String> headers = new HashMap<String, String>();
-                            headers.put("Content-Type", "application/json; charset=utf-8");
-                            headers.put("Accept", "application/json");
-                            return headers;
-                        }
+        request.setRetryPolicy(new DefaultRetryPolicy(0,-1,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(this).addToRequestQueue(
+                request
+        );
+    }
 
-                        @Override
-                        public String getBodyContentType() {
-                            return "application/json; charset=utf-8" + getParamsEncoding();
-                        }
+    private JsonObjectRequest buildRequest(JSONObject jobject) {
+
+        return new JsonObjectRequest(
+                Request.Method.POST,
+                Constantes.RESPUESTAS_UNIDADES,
+                jobject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        procesarRespuesta(response);
                     }
-            );
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("error_volley", "Error Volley: " + error.getMessage());
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8" + getParamsEncoding();
+            }
+        };
     }
 
     private String obtenerObservaciones(String accion, String ubicacion) {
@@ -249,6 +263,6 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
     private void procesarRespuesta(JSONObject response) {
 
-        //TODO: Procesar respuesta
+        Toast.makeText(this, getResources().getString(R.string.not_unidades),Toast.LENGTH_LONG).show();;
     }
 }
