@@ -30,7 +30,7 @@ public final class VolleySingleton {
      */
     public static synchronized VolleySingleton getInstance(Context context) {
         if (singleton == null) {
-            singleton = new VolleySingleton(context.getApplicationContext());
+            singleton = new VolleySingleton(context);
         }
         return singleton;
     }

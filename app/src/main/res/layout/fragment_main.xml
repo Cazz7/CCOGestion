@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/etBusqueda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/busqueda"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recRadNotif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="3dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:layout_below="@+id/etSearch"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAdd"

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -348,42 +349,52 @@ public class InsertFragment extends Fragment {
         // Depurando objeto Json...
         Log.d(TAG, jobject.toString());
 
+        JsonObjectRequest request = buildRequest(jobject);
+
+        //Para evitar una request doble
+        request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));;
         // Actualizar datos en el servidor
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(
-                new JsonObjectRequest(
-                        Request.Method.POST,
-                        Constantes.INSERT_NUEVO_EVENTO,
-                        jobject,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                // Procesar la respuesta del servidor
-                                procesarRespuesta(response);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(TAG, "Error Volley: " + error.getMessage());
-                            }
-                        }
+                request
+        );
+    }
 
-                )
-                {
+    private JsonObjectRequest buildRequest(JSONObject jobject) {
+
+        return new JsonObjectRequest(
+                Request.Method.POST,
+                Constantes.INSERT_NUEVO_EVENTO,
+                jobject,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public Map<String, String> getHeaders() {
-                        Map<String, String> headers = new HashMap<String, String>();
-                        headers.put("Content-Type", "application/json; charset=utf-8");
-                        headers.put("Accept", "application/json");
-                        return headers;
+                    public void onResponse(JSONObject response) {
+                        // Procesar la respuesta del servidor
+                        procesarRespuesta(response);
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public String getBodyContentType() {
-                        return "application/json; charset=utf-8" + getParamsEncoding();
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "Error Volley: " + error.getMessage());
                     }
                 }
-        );
+
+        )
+        {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8" + getParamsEncoding();
+            }
+        };
     }
 
     private void procesarRespuestaNotificación(JSONObject response) {

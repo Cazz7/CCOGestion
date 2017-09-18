@@ -26,8 +26,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     //Qué hacer cuando el método ser recibe desde FCM
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getData().get(Constantes.ACCION).isEmpty() ||
-                remoteMessage.getData().get(Constantes.ACCION) == null) {
+
+        if (!remoteMessage.getData().containsKey(Constantes.ACCION)) {
             showNotificationNewEvent(remoteMessage.getData().get(Constantes.RADICADO),
                     remoteMessage.getData().get(Constantes.COD_EVENTO),
                     remoteMessage.getData().get(Constantes.VIA),
@@ -64,7 +64,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setAutoCancel(true)
-                .setContentTitle("Nuevo Evento. " + "Radicado: " + idradicado + "Código: " + cod_evento )
+                .setContentTitle("Nuevo Evento. " + "Radicado: " + idradicado + " Código: " + cod_evento )
                 .setVibrate(new long[] { 500, 500, 500, 500, 500 })
                 .setContentText(via + " - " + kilo_sector)
                 .setLights(Color.CYAN, 3000, 3000)
