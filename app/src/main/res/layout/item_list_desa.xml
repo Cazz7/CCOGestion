@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <!-- Evento -->
+    <TextView
+        android:id="@+id/evento_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fecha_item"
+        android:layout_marginTop="16dp"
+        android:text="@string/fd_evento1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <!-- Radicado -->
+    <TextView
+        android:id="@+id/radicado_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/fd_radicado1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/accent" />
+
+    <!-- Fecha -->
+    <TextView
+        android:id="@+id/fecha_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView"
+        android:text="@string/fd_fecha1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black" />
+
+    <!-- Subevento -->
+    <TextView
+        android:id="@+id/subEvento_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evento_item"
+        android:layout_marginTop="8dp"
+        android:text="@string/fd_subEvento1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="italic" />
+
+    <!-- Icono para la fecha -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="3dp"
+        android:src="@mipmap/ic_calendar" />
+
+</RelativeLayout>

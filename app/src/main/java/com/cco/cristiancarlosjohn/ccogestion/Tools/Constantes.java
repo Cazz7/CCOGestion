@@ -47,9 +47,7 @@ public class Constantes {
     public static final String UNIDAD = "Unidades";
 
     //Constantes - by Carlos Cortinez
-    public static final int CODIGO_DETALLE = 100;
 
-    //CARLOS
     //URLs del Web Service
     private static final String URL_C = "http://ptcazz.000webhostapp.com/Carlos_C";
     public static final String GET_EVENTOS_CURSO = URL_C +"/obtener_radicados.php";
@@ -59,4 +57,16 @@ public class Constantes {
     //NOTIFICACIONES
     public static final String GET_NOTIFICACIONES = "https://ptcazz.000webhostapp.com/cristian/push_notification.php";
 
+    //Constantes - by John
+    private static final String IP = "http://ptcazz.000webhostapp.com/jemg";
+
+    //URLs del Web Service
+    public static final String GET =       IP + "/obtener_desaeventos.php";
+    public static final String GET_BY_ID = IP + "/obtener_desaeventos_por_id.php";
+    public static final String UPDATE =    IP + "/actualizar_desaeventos.php";
+    public static final String INSERT =    IP + "/insertar_desaeventos.php";
+
+    public static final String EXTRA_ID = "IDEXTRA";
+    public static final int CODIGO_DETALLE = 100;
+    public static final int CODIGO_ACTUALIZACION = 101;
 }

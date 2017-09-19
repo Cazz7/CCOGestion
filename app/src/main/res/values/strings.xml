@@ -103,6 +103,27 @@
     <string name="seleccionar_ubicacion">Ingrese ubicación</string>
     <string name="ubicación">Ubicación</string>
 
+    <!--Desaeventos-->
+    <string name="fd_desaevento">Id Desarrollo Evento:</string>
+    <string name="fd_desaevento1">Id Desarrollo Evento</string>
+    <string name="fd_radicado">Radicado:</string>
+    <string name="fd_radicado1">Radicado</string>
+    <string name="fd_evento">Evento:</string>
+    <string name="fd_evento1">Evento</string>
+    <string name="fd_subEvento">Sub Evento:</string>
+    <string name="fd_subEvento1">Sub Evento</string>
+    <string name="fd_observaciones">Observaciones:</string>
+    <string name="fd_observaciones1">Observaciones</string>
+    <string name="fd_estado">Estado:</string>
+    <string name="fd_estado1">Estado</string>
+    <string name="fd_fechaIngreso">Fecha Ingreso Sistema:</string>
+    <string name="fd_fechaIngreso1">Fecha Ingreso Sistema</string>
+    <string name="fd_fecha">Fecha y Hora:</string>
+    <string name="fd_fecha1">Fecha y Hora</string>
+    <string name="fd_usuario">Usuario:</string>
+    <string name="fd_usuario1">Usuario</string>
+    <string name="fecha_dummy">2017/09/18</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

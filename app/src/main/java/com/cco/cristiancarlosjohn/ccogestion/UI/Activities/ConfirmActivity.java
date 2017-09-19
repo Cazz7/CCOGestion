@@ -36,6 +36,7 @@ import java.util.Map;
 import okhttp3.internal.Util;
 
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
+import static com.cco.cristiancarlosjohn.ccogestion.R.id.fabConfirmation;
 
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
@@ -64,6 +65,17 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         readNotification();
 
+        bDetalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DesaeventosActivity.class);
+                if (!radicado.isEmpty() && radicado != null) {
+                    intent.putExtra(Constantes.RADICADO, radicado);
+                    startActivity(intent);
+                }
+            }
+        });
+
         fabHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +96,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         bAceptar = (Button)findViewById(R.id.btnAceptarEvento);
         bLlegar = (Button)findViewById(R.id.btnLlegarEvento);
         bSuperar = (Button)findViewById(R.id.btnSuperarEvento);
-        fabHome = (FloatingActionButton) findViewById(fab);
+        fabHome = (FloatingActionButton) findViewById(R.id.fabConfirmation);
     }
 
     public static void launch(Activity activity, String idradicado, String cod_evento, String via, String kilo_sector) {

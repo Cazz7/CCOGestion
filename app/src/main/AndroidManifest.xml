@@ -15,8 +15,8 @@
         <!-- Actividad Splash -->
         <activity
             android:name=".UI.Activities.SplashActivity"
-            android:theme="@style/SplashScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".UI.Activities.MainActivity" />
+            android:name=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".UI.Activities.LoginActivity" />
+            android:name=".UI.Activities.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Firebase -->
         <service android:name=".WEB.FirebaseMessagingService">
@@ -47,8 +47,8 @@
         <activity
             android:name=".UI.Activities.ConfirmActivity"
             android:label="@string/title_activity_confirmation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Actividad Insertar -->
         <activity
             android:name=".UI.Activities.InsertActivity"
@@ -59,6 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
         </activity>
+        <activity android:name=".UI.Activities.DesaeventosActivity" />
+        <activity android:name=".UI.Activities.InsertDesaActivity" />
+        <activity android:name=".UI.Activities.DetailDesaActivity" />
+        <activity android:name=".UI.Activities.UpdateDesaActivity"></activity>
     </application>
 
 </manifest>
