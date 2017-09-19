@@ -59,10 +59,42 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
         </activity>
-        <activity android:name=".UI.Activities.DesaeventosActivity" />
-        <activity android:name=".UI.Activities.InsertDesaActivity" />
-        <activity android:name=".UI.Activities.DetailDesaActivity" />
-        <activity android:name=".UI.Activities.UpdateDesaActivity"></activity>
+        <activity
+            android:name=".UI.Activities.InsertDesaActivity"
+            android:label="@string/title_activity_insert_desa"
+            android:parentActivityName=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UI.Activities.DesaeventosActivity"
+            android:label="@string/title_activity_desarrollo"
+            android:parentActivityName=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UI.Activities.DetailDesaActivity"
+            android:label="@string/title_activity_detalle"
+            android:parentActivityName=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UI.Activities.UpdateDesaActivity"
+            android:label="@string/title_activity_actualizar"
+            android:parentActivityName=".UI.Activities.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

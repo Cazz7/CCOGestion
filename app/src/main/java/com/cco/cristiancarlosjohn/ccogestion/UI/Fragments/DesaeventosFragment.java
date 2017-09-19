@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.Model.DesaEventos;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.DesaeventosActivity;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertDesaActivity;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Adapters.DesaEventosAdapter;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
@@ -87,12 +88,15 @@ public class DesaeventosFragment extends Fragment {
      */
     public void cargarAdaptador() {
         // Petición GET
+        String radicado = DesaeventosActivity.radicado;
+        String newURL = Constantes.GET + "?IdRadicado=" + radicado;
+
         VolleySingleton.
                 getInstance(getActivity()).
                 addToRequestQueue(
                         new JsonObjectRequest(
                                 Request.Method.GET,
-                                Constantes.GET,
+                                newURL,
                                 null,
                                 new Response.Listener<JSONObject>() {
 

@@ -12,7 +12,7 @@ import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.DesaeventosFragment;
 public class DesaeventosActivity extends AppCompatActivity {
 
     //Componentes UI
-    TextView tvRadicado;
+    public static String radicado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class DesaeventosActivity extends AppCompatActivity {
 
         //tvRadicado = (TextView)findViewById(R.id.tvRadicado);
 
-        //readRadicated();
+        readRadicated();
 
         // Creación del fragmento principal
         if (savedInstanceState == null) {
@@ -45,9 +45,7 @@ public class DesaeventosActivity extends AppCompatActivity {
 
     private void readRadicated() {
         Intent intent = getIntent();
-        String radicado = intent.getStringExtra(Constantes.RADICADO);
-
-        //tvRadicado.setText(" " + radicado);
+        radicado = intent.getStringExtra(Constantes.RADICADO);
     }
 
 }
