@@ -24,6 +24,7 @@ public class Constantes {
     //Constantes para servicio HTTP - by Cristian
     private static final String URL = "https://ptcazz.000webhostapp.com";
 
+
     public static final String GET_USERS = URL + "/cristian/obtener_usuario_por_id.php";
     public static final String REGISTER_TOKEN = URL + "/cristian/register_token.php";
 
@@ -53,6 +54,7 @@ public class Constantes {
     public static final String GET_EVENTOS_CURSO = URL_C +"/obtener_radicados.php";
     public static final String INSERT_NUEVO_EVENTO = URL_C+"/insertar_radicado_y_desaeventos.php";
     public static final String RESPUESTAS_UNIDADES = URL_C +"/RespuestasUnidades.php";
+
 
     //NOTIFICACIONES
     public static final String GET_NOTIFICACIONES = "https://ptcazz.000webhostapp.com/cristian/push_notification.php";

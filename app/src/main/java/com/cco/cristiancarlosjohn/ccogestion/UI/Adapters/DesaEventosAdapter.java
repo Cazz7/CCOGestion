@@ -53,7 +53,7 @@ public class DesaEventosAdapter extends RecyclerView.Adapter<DesaEventosAdapter.
         viewHolder.evento.setText(items.get(i).getCOD_EVENTO());
         viewHolder.subEvento.setText(items.get(i).getSUB_EVENTO());
         viewHolder.fecha.setText(items.get(i).getFECHA());
-        viewHolder.radicado.setText(items.get(i).getIdRadicado());
+        viewHolder.observaciones.setText(items.get(i).getOBSERVACIONES());
     }
 
     /**
@@ -74,7 +74,7 @@ public class DesaEventosAdapter extends RecyclerView.Adapter<DesaEventosAdapter.
         public TextView evento;
         public TextView subEvento;
         public TextView fecha;
-        public TextView radicado;
+        public TextView observaciones;
         public ItemClickListenerDesaEvento listener;
 
         public DesaEventosViewHolder(View v, ItemClickListenerDesaEvento listener) {
@@ -82,7 +82,7 @@ public class DesaEventosAdapter extends RecyclerView.Adapter<DesaEventosAdapter.
             evento = (TextView) v.findViewById(R.id.evento_item);
             subEvento = (TextView) v.findViewById(R.id.subEvento_item);
             fecha = (TextView) v.findViewById(R.id.fecha_item);
-            radicado = (TextView) v.findViewById(R.id.radicado_item);
+            observaciones = (TextView) v.findViewById(R.id.observaciones_item);
             this.listener = listener;
             v.setOnClickListener(this);
         }

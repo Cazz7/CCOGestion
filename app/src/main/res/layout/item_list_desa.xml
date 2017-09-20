@@ -7,29 +7,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <!-- Evento -->
+    <!-- Observaciones -->
     <TextView
-        android:id="@+id/evento_item"
-        android:layout_width="wrap_content"
+        android:id="@+id/observaciones_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/fecha_item"
-        android:layout_marginTop="16dp"
-        android:text="@string/fd_evento1"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="10dp"
+        android:text="@string/fd_observaciones1"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <!-- Radicado -->
+    <!-- SubEvento -->
     <TextView
-        android:id="@+id/radicado_item"
+        android:id="@+id/subEvento_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/fd_radicado1"
+        android:text="@string/fd_subEvento1"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/accent" />
+        android:textColor="@color/colorPressedMini" />
 
     <!-- Fecha -->
     <TextView
@@ -44,16 +44,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black" />
 
-    <!-- Subevento -->
+    <!-- Evento -->
     <TextView
-        android:id="@+id/subEvento_item"
+        android:id="@+id/evento_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/evento_item"
-        android:layout_marginTop="8dp"
-        android:text="@string/fd_subEvento1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textStyle="italic" />
+        android:layout_toLeftOf="@+id/subEvento_item"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="26dp"
+        android:text="@string/fd_evento1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="italic"
+        android:textColor="@color/accent"/>
 
     <!-- Icono para la fecha -->
     <ImageView
