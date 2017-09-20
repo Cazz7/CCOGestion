@@ -1,7 +1,9 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,6 +29,7 @@ import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +37,8 @@ import java.util.Map;
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
+
+    public String Respuestas_Sito_Enviar;
 
     UserDBHelper dbUsers;
     String accion; //Acción que realiza el usuario al dar clic
@@ -120,7 +126,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
                 break;
             case R.id.btnLlegarEvento:
                 accion = getResources().getString(R.string.accion_llegar);
-                DisplayLocationDialog();
+                RespuestaSitio();
                 break;
             case R.id.btnSuperarEvento:
                 accion = getResources().getString(R.string.accion_disponible);
@@ -131,6 +137,70 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         }
 
 
+    }
+
+    private void RespuestaSitio() {
+        // where we will store or remove selected items
+        final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
+        //Obtengo String del array unidades_operacion
+        final String[] Respuesta_Sitio_String = getResources().getStringArray(R.array.Respuestas_Sitio_Array);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // set the dialog title
+        builder.setTitle("Seleccione en sitio")
+                // specify the list array, the items to be selected by default (null for none),
+                // and the listener through which to receive call backs when items are selected
+                // R.array.choices were set in the resources res/values/strings.xml
+
+
+                .setMultiChoiceItems(R.array.Respuestas_Sitio_Array, null, new DialogInterface.OnMultiChoiceClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                        if (isChecked) {
+                            // if the user checked the item, add it to the selected items
+                            mSelectedItems.add(which);
+                        }
+
+                        else if (mSelectedItems.contains(which)) {
+                            // else if the item is already in the array, remove it
+                            mSelectedItems.remove(Integer.valueOf(which));
+                        }
+                    }
+
+                })
+
+                // Set the action buttons
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        // user clicked OK, so save the mSelectedItems results somewhere
+                        // here we are trying to retrieve the selected items indices
+                        Respuestas_Sito_Enviar= dbUsers.getProfile()+"-"+dbUsers.getUser()+ " informa en sitio:" ;
+                        for(Integer i : mSelectedItems){
+                            Respuestas_Sito_Enviar +=", "+Respuesta_Sitio_String[i];
+                        }
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Respuestas seleccionadas: " + Respuestas_Sito_Enviar,
+                                Toast.LENGTH_LONG).show();
+                        createVolleyRequest(Respuestas_Sito_Enviar);
+
+
+                    }
+                })
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // removes the AlertDialog in the screen
+                    }
+                })
+
+                .show();
     }
 
     private void DisplayLocationDialog() {
@@ -147,14 +217,14 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     //Respuesta de la elección
     public void onComplete(String ubicacion) {
         if( !ubicacion.isEmpty() && ubicacion != null){
-            createVolleyRequest(ubicacion);
+            String observacion = obtenerObservaciones(accion,ubicacion);
+            createVolleyRequest(observacion);
         }
     }
 
-    private void createVolleyRequest(String ubicacion) {
+    private void createVolleyRequest(String observacion) {
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
-        String observacion = obtenerObservaciones(accion,ubicacion);
         //Elementos a enviar a la request php
         map.put(Constantes.IDRADICADO, radicado);
         map.put(Constantes.FECHA_CREACION, ObtenerTiempo());

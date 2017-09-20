@@ -66,18 +66,18 @@
         <item>OTRA</item>
     </string-array>
 
-    <!-- Array Unidades de operación -->
-    <string-array name="unidades_operacion">
-        <item>DITRA</item>
-        <item>AMBULANCIA</item>
-        <item>GRÚA</item>
-        <item>MTTO_VP_Y_SE</item>
-        <item>MTTO_DC</item>
-        <item>CONCESIÓN</item>
-        <item>MOVILIDAD_MEDELLIN</item>
-        <item>MOVILIDAD_ENVIGADO</item>
-        <item>MOVILIDAD_RIONEGRO</item>
-    </string-array>
+        <!-- Array Unidades de operación -->
+        <string-array name="unidades_operacion">
+            <item>DITRA</item>
+            <item>AMBULANCIA</item>
+            <item>GRÚA</item>
+            <item>MTTO_VP_Y_SE</item>
+            <item>MTTO_DC</item>
+            <item>CONCESIÓN</item>
+            <item>MOVILIDAD_MEDELLIN</item>
+            <item>MOVILIDAD_ENVIGADO</item>
+            <item>MOVILIDAD_RIONEGRO</item>
+        </string-array>
 
     <!-- Unidades de operación -->
     <string name="DITRA">DITRA</string>
@@ -112,5 +112,20 @@
     <string name="texto_llegar">ha llegado al sitio</string>
     <string name="texto_disponible">está disponible</string>
     <string name="busqueda">Buscar por radicado</string>
+
+    <!-- Array Respuestas en sitio -->
+    <string-array name="Respuestas_Sitio_Array">
+        <item>Sin novedad en el sector</item>
+        <item>PA solicita apoyo de P4</item>
+        <item>SG solicita apoyo de P3</item>
+        <item>PEV afectación parcial en la vía</item>
+        <item>PEB afectación total en la vía</item>
+        <item>RDA Reporte caída de poste o redes de energía</item>
+        <item>Apoyo personal de mantenimiento de vías</item>
+        <item>Apoyo Guardas de Tránsito</item>
+        <item>Apoyo Policía Judicial por 980</item>
+        <item>Apoyo otras entidades </item>
+    </string-array>
+
 
 </resources>
