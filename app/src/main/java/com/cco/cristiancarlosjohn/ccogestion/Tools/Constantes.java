@@ -24,10 +24,6 @@ public class Constantes {
     //Constantes para servicio HTTP - by Cristian
     private static final String URL = "https://ptcazz.000webhostapp.com";
 
-    /**
-     * Constantes para servicio HTTP - by JEMG
-     */
-    private static final String IP = "http://ptcazz.000webhostapp.com/jemg";
 
     public static final String GET_USERS = URL + "/cristian/obtener_usuario_por_id.php";
     public static final String REGISTER_TOKEN = URL + "/cristian/register_token.php";
@@ -59,13 +55,6 @@ public class Constantes {
     public static final String INSERT_NUEVO_EVENTO = URL_C+"/insertar_radicado_y_desaeventos.php";
     public static final String RESPUESTAS_UNIDADES = URL_C +"/RespuestasUnidades.php";
 
-    /**
-     * URLs del Web Service JEMG
-     */
-    public static final String GET =       IP + "/obtener_desaeventos.php";
-    public static final String GET_BY_ID = IP + "/obtener_desaeventos_por_id.php";
-    public static final String UPDATE =    IP + "/actualizar_desaeventos.php";
-    public static final String INSERT =    IP + "/insertar_desaeventos.php";
 
     //NOTIFICACIONES
     public static final String GET_NOTIFICACIONES = "https://ptcazz.000webhostapp.com/cristian/push_notification.php";

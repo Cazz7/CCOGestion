@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,15 +27,9 @@ import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.internal.Util;
-
-import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
-import static com.cco.cristiancarlosjohn.ccogestion.R.id.fabConfirmation;
 
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
@@ -68,6 +61,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         bDetalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+
                 Intent intent = new Intent(v.getContext(), DesaeventosActivity.class);
                 if (!radicado.isEmpty() && radicado != null) {
                     intent.putExtra(Constantes.RADICADO, radicado);

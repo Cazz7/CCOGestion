@@ -138,7 +138,7 @@ public class UpdateDesaFragment extends Fragment {
      * Obtiene los datos desde el servidor
      */
     private void cargarDatos() {
-        // Añadiendo idMeta como parámetro a la URL
+        // Añadiendo IdDesaeventos como parámetro a la URL
         String newURL = Constantes.GET_BY_ID + "?IdDesaeventos=" + idDesaEventos;
 
         // Consultar el detalle del DesaEvento
