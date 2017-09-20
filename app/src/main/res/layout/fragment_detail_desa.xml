@@ -9,24 +9,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="50">
+        android:layout_weight="30"
+        >
 
         <ImageView
             android:id="@+id/cabecera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="28dp"
-            android:layout_weight="30" />
+            android:layout_weight="30"
+            android:background="@color/colorPressedMini"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabUpdate"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
+            fab:fabSize="mini"
             android:src="@mipmap/ic_edit"/>
 
         <TextView
@@ -94,6 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fecha_label"
+            android:layout_toRightOf="@+id/estado"
+            android:layout_alignStart="@+id/fecha_label"
+            android:layout_alignLeft="@+id/fecha_label"
             android:layout_marginBottom="16dp"
             android:text="@string/fd_fecha"
             android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -123,6 +129,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/usuario_label"
+            android:layout_alignStart="@id/usuario_label"
+            android:layout_alignLeft="@+id/usuario_label"
+            android:layout_toRightOf="@id/fechaIng"
             android:text="@string/fd_usuario"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -130,10 +139,12 @@
             android:id="@+id/observacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/observacion_label"
-            android:layout_marginBottom="16dp"
             android:text="@string/fd_observaciones"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_marginBottom="16dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_below="@+id/observacion_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/observacion_label"
@@ -156,7 +167,9 @@
             android:id="@+id/fecha_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/estado"
+            android:layout_below="@+id/observacion"
+            android:layout_toRightOf="@id/estado_label"
+            android:layout_marginLeft="120dp"
             android:text="@string/fd_fecha"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/black" />
@@ -174,7 +187,9 @@
             android:id="@+id/usuario_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fechaIng"
+            android:layout_below="@+id/estado"
+            android:layout_marginLeft="23dp"
+            android:layout_toRightOf="@id/fechaIng_label"
             android:text="@string/fd_usuario"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/black" />

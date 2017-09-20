@@ -34,9 +34,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
-import static com.cco.cristiancarlosjohn.ccogestion.R.id.fabConfirmation;
-
 public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
 
     public String Respuestas_Sito_Enviar;
