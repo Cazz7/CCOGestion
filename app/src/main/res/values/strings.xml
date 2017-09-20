@@ -133,6 +133,8 @@
     <string name="texto_llegar">ha llegado al sitio</string>
     <string name="texto_disponible">está disponible</string>
     <string name="busqueda">Buscar por radicado</string>
+
+    <!--Activities-->
     <string name="title_activity_insert_desa">Continuar evento</string>
     <string name="title_activity_desarrollo">Desarrollo de Evento</string>
     <string name="title_activity_detalle">Detalle</string>
