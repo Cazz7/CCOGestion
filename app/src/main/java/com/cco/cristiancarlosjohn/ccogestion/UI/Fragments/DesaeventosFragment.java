@@ -41,7 +41,7 @@ public class DesaeventosFragment extends Fragment {
     private RecyclerView lista;
     private RecyclerView.LayoutManager lManager;
 
-    FloatingActionButton fab;
+    FloatingActionButton fabNuevo;
     private Gson gson = new Gson();
 
     public DesaeventosFragment() {
@@ -65,16 +65,21 @@ public class DesaeventosFragment extends Fragment {
         cargarAdaptador();
 
         // Obtener instancia del FAB
-        fab = (FloatingActionButton) v.findViewById(R.id.fabDesaeventos);
+        fabNuevo = (FloatingActionButton) v.findViewById(R.id.fabDesaeventos);
 
         // Asignar escucha al FAB
-        fab.setOnClickListener(
+        fabNuevo.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Iniciar actividad de inserción
-                        getActivity().startActivityForResult(
-                                new Intent(getActivity(), InsertDesaActivity.class), 3);
+                        Intent intent = new Intent(getActivity(), InsertDesaActivity.class);
+                        intent.putExtra(Constantes.RADICADO, DesaeventosActivity.radicado);
+                        intent.putExtra(Constantes.COD_EVENTO, DesaeventosActivity.cod_evento);
+                        startActivity(intent);
+                        //TODO: borrar cuando funcione la forma de arriba
+                        //getActivity().startActivityForResult(
+                        //        new Intent(getActivity(), InsertDesaActivity.class), 3);
                     }
                 }
         );

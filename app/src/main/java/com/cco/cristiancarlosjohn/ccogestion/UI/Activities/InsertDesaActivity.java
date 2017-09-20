@@ -1,5 +1,6 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.cco.cristiancarlosjohn.ccogestion.R;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.ConfirmDialogFragment;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.DatePickerFragment;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.InsertDesaFragment;
@@ -15,15 +17,18 @@ public class InsertDesaActivity extends AppCompatActivity
         implements DatePickerFragment.OnDateSelectedListener,
         ConfirmDialogFragment.ConfirmDialogListener {
 
+    public static String radicado;
+    public static String cod_evento;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_desaeventos);
 
+            setRadCod();
+
             if (getSupportActionBar() != null)
                 getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_done);
-
-            Toast.makeText(this, "Estoy en el ACTIVITY INSERT", Toast.LENGTH_SHORT).show();
 
             // Creación del fragmento de inserción
             if (savedInstanceState == null) {
@@ -33,7 +38,13 @@ public class InsertDesaActivity extends AppCompatActivity
             }
         }
 
-        @Override
+    private void setRadCod() {
+        Intent intent = getIntent();
+        radicado = intent.getStringExtra(Constantes.RADICADO);
+        cod_evento = intent.getStringExtra(Constantes.COD_EVENTO);
+    }
+
+    @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.menu_form, menu);
             return true;

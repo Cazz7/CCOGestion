@@ -23,6 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
+import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Activities.InsertDesaActivity;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONException;
@@ -39,14 +41,10 @@ import java.util.Map;
  */
 public class InsertDesaFragment extends Fragment {
 
-    /**
-     * Etiqueta para depuración
-     */
+    //Etiqueta para depuración
     private static final String TAG = InsertDesaFragment.class.getSimpleName();
 
-    /*
-    Controles
-    */
+    //Elementos
     TextView idRadicadoInput;
     EditText eventoInput;
     EditText subEventoInput;
@@ -55,6 +53,9 @@ public class InsertDesaFragment extends Fragment {
     TextView fechaInput;
     TextView fechaIngInput;
     EditText usuarioInput;
+
+    //DbHelper
+    UserDBHelper userDB = new UserDBHelper(getActivity());
 
     public InsertDesaFragment() {
     }
@@ -74,13 +75,12 @@ public class InsertDesaFragment extends Fragment {
 
         // Obtención de instancias controles
         idRadicadoInput = (TextView) v.findViewById(R.id.idradicado_input_fi);
-        eventoInput = (EditText) v.findViewById(R.id.evento_input_fi);
         subEventoInput = (EditText) v.findViewById(R.id.subEvento_input_fi);
         observacionesInput = (EditText) v.findViewById(R.id.observaciones_input_fi);
-        estadoInput = (EditText) v.findViewById(R.id.estado_input_fi);
         fechaInput = (TextView) v.findViewById(R.id.fecha_input_fi);
         fechaIngInput = (TextView) v.findViewById(R.id.fechaIng_input_fi);
-        usuarioInput = (EditText) v.findViewById(R.id.usuario_input_fi);
+
+        setDefaultFields();
 
         // Todo: Revisar Error faltante
         fechaInput.setOnClickListener(
@@ -106,6 +106,12 @@ public class InsertDesaFragment extends Fragment {
         );
 
         return v;
+    }
+
+    private void setDefaultFields() {
+        if(!InsertDesaActivity.radicado.isEmpty() && InsertDesaActivity.radicado != null ){
+            idRadicadoInput.setText(InsertDesaActivity.radicado);
+        }
     }
 
     @Override
@@ -152,23 +158,20 @@ public class InsertDesaFragment extends Fragment {
 
         // Obtener valores actuales de los controles
         final String idRadicado = idRadicadoInput.getText().toString();
-        final String evento  = eventoInput.getText().toString();
         final String subEvento = subEventoInput.getText().toString();
         final String observaciones = observacionesInput.getText().toString();
-        final String estado = estadoInput.getText().toString();
         final String fecha = fechaIngInput.getText().toString();
         final String fechaIng = fechaIngInput.getText().toString();
-        final String usuario = usuarioInput.getText().toString();
 
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
         map.put("IdRadicado", idRadicado);
         map.put("FECHA", fecha);
-        map.put("COD_EVENTO", evento);
+        map.put("COD_EVENTO", InsertDesaActivity.cod_evento);
         map.put("SUB_EVENTO", subEvento);
         map.put("OBSERVACIONES", observaciones);
-        map.put("USUARIO", usuario);
-        map.put("Estado", estado);
+        map.put("USUARIO", userDB.getUser());
+        map.put("Estado", "ABIERTO");
         map.put("FechaIngSistema", fechaIng);
 
         // Crear nuevo objeto Json basado en el mapa
@@ -269,11 +272,10 @@ public class InsertDesaFragment extends Fragment {
      * están completos
      */
     public boolean camposVacios() {
-        String evento = eventoInput.getText().toString();
         String subEvento = subEventoInput.getText().toString();
         String observaciones = observacionesInput.getText().toString();
 
-        return (evento.isEmpty() || subEvento.isEmpty() || observaciones.isEmpty());
+        return (subEvento.isEmpty() || observaciones.isEmpty());
     }
 
     /**

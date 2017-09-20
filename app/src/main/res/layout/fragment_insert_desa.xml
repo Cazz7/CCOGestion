@@ -22,7 +22,7 @@
         android:textStyle="bold" />
 
     <!-- IdRadicadoo-->
-    <EditText
+    <TextView
         android:id="@+id/idradicado_input_fi"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -31,34 +31,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp" />
 
-    <!-- Etiqueta Evento-->
-    <TextView
-        android:id="@+id/evento_label_fi"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/idradicado_label_fi"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="@string/fd_evento"
-        android:textStyle="bold" />
 
-    <!-- Evento-->
-    <EditText
-        android:id="@+id/evento_input_fi"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/idradicado_label_fi"
-        android:layout_marginLeft="53dp"
-        android:hint="@string/fd_evento1"
-        android:maxLength="10"
-        android:maxLines="1"
-        android:minLines="1"
-        android:phoneNumber="false"
-        android:singleLine="true" />
 
     <!-- Etiqueta Sub Evento-->
     <TextView
@@ -67,8 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/idradicado_label_fi"
-        android:layout_marginLeft="130dp"
-        android:layout_marginStart="130dp"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:text="@string/fd_subEvento"
@@ -81,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/idradicado_label_fi"
-        android:layout_marginLeft="210dp"
+        android:layout_toRightOf="@+id/subEvento_label_fi"
         android:hint="@string/fd_subEvento1"
         android:maxLength="10"
         android:maxLines="1"
@@ -94,39 +65,13 @@
         android:id="@+id/observaciones_input_fi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/evento_label_fi"
+        android:layout_below="@+id/subEvento_label_fi"
         android:layout_centerHorizontal="true"
         android:hint="@string/fd_observaciones"
         android:maxLength="128"
         android:nestedScrollingEnabled="true"
         android:paddingBottom="30dp"
         android:paddingTop="22dp" />
-
-    <!-- Etiqueta Estado-->
-    <TextView
-        android:id="@+id/estado_label_fi"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/observaciones_input_fi"
-        android:paddingBottom="16dp"
-        android:paddingTop="22dp"
-        android:text="@string/fd_estado"
-        android:textStyle="bold" />
-
-    <!-- Estado-->
-    <EditText
-        android:id="@+id/estado_input_fi"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/observaciones_input_fi"
-        android:layout_marginLeft="53dp"
-        android:paddingBottom="16dp"
-        android:paddingTop="22dp"
-        android:hint="@string/fd_estado1" />
 
     <!-- Etiqueta Fecha y Hora-->
     <TextView
@@ -136,7 +81,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/estado_label_fi"
+        android:layout_below="@+id/observaciones_input_fi"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:text="@string/fd_fecha"
@@ -148,8 +93,8 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/estado_label_fi"
-        android:layout_marginLeft="92dp"
+        android:layout_below="@+id/observaciones_input_fi"
+        android:layout_toRightOf="@+id/fecha_label_fi"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:text="@string/fecha_dummy" />
@@ -175,36 +120,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/fecha_label_fi"
-        android:layout_marginLeft="154dp"
+        android:layout_toRightOf="@id/fechaIng_label_fi"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:text="@string/fecha_dummy" />
-
-    <!-- Etiqueta Usuario-->
-    <TextView
-        android:id="@+id/usuario_label_fi"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/fechaIng_label_fi"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="@string/fd_usuario"
-        android:textStyle="bold" />
-
-    <!-- Usuario-->
-    <EditText
-        android:id="@+id/usuario_input_fi"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/fechaIng_label_fi"
-        android:layout_marginLeft="58dp"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp" />
-
 
 </RelativeLayout>
 

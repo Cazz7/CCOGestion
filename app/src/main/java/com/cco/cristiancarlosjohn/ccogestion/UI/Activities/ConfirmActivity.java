@@ -43,7 +43,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     UserDBHelper dbUsers;
     String accion; //Acción que realiza el usuario al dar clic
     String radicado;
-    String codigo;
+    String cod_evento;
     String via;
     String sector;
 
@@ -71,6 +71,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
                 Intent intent = new Intent(v.getContext(), DesaeventosActivity.class);
                 if (!radicado.isEmpty() && radicado != null) {
                     intent.putExtra(Constantes.RADICADO, radicado);
+                    intent.putExtra(Constantes.COD_EVENTO, cod_evento);
                     startActivity(intent);
                 }
             }
@@ -118,12 +119,12 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     private void readNotification() {
         Intent intent = getIntent();
         radicado = intent.getStringExtra(Constantes.RADICADO);
-        codigo = intent.getStringExtra(Constantes.COD_EVENTO);
+        cod_evento = intent.getStringExtra(Constantes.COD_EVENTO);
         via = intent.getStringExtra(Constantes.VIA);
         sector = intent.getStringExtra(Constantes.SECTOR);
 
         tvRadicado.setText(" " + radicado);
-        tvCodigo.setText(" " + codigo);
+        tvCodigo.setText(" " + cod_evento);
         tvVia.setText(" " + via);
         tvSector.setText(" " + sector);
     }
@@ -175,7 +176,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         //Elementos a enviar a la request php
         map.put(Constantes.IDRADICADO, radicado);
         map.put(Constantes.FECHA_CREACION, ObtenerTiempo());
-        map.put(Constantes.COD_EVENTO2, codigo);
+        map.put(Constantes.COD_EVENTO2, cod_evento);
         map.put(Constantes.SUB_EVENTO, "");
         map.put(Constantes.OBSERVACIONES, observacion);
         map.put(Constantes.ESTADO, "ABIERTO");
@@ -245,8 +246,8 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
+                        dbUsers.getProfile() + "-" +
                         dbUsers.getUser() + " " +
-                        dbUsers.getProfile() + " " +
                         parte2 + " " +
                         tarea + " " +
                         parte3 + " " +

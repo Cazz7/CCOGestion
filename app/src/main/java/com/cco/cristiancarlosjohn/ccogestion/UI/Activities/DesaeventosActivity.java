@@ -13,6 +13,7 @@ public class DesaeventosActivity extends AppCompatActivity {
 
     //Componentes UI
     public static String radicado;
+    public static String cod_evento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class DesaeventosActivity extends AppCompatActivity {
     private void readRadicated() {
         Intent intent = getIntent();
         radicado = intent.getStringExtra(Constantes.RADICADO);
+        cod_evento = intent.getStringExtra(Constantes.COD_EVENTO);
     }
 
 }

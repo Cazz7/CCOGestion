@@ -12,7 +12,6 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:scaleType="center"
-        android:background="@color/accent"
         android:text="@string/seleccionar_ubicacion"/>
     <EditText
         android:id="@+id/etUbicacion"
