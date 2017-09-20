@@ -8,12 +8,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -28,12 +26,9 @@ import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.internal.Util;
 
 import static com.cco.cristiancarlosjohn.ccogestion.R.id.fab;
 
@@ -263,6 +258,6 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
     private void procesarRespuesta(JSONObject response) {
 
-        Toast.makeText(this, getResources().getString(R.string.not_unidades),Toast.LENGTH_LONG).show();;
+        //Toast.makeText(this, getResources().getString(R.string.not_unidades),Toast.LENGTH_LONG).show();;
     }
 }
