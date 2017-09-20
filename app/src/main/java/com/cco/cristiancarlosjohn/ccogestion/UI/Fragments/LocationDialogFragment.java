@@ -72,7 +72,7 @@ public class LocationDialogFragment extends DialogFragment {
             this.mListener = (OnCompleteListener)context;
         }
         catch (final ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnCompleteListener");
+            throw new ClassCastException(context.toString() + " debe implementarse OnCompleteListener");
         }
     }
 }
