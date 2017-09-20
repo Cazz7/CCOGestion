@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/subEvento_item"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="25dp"
+        android:layout_marginRight="23dp"
         android:text="@string/fd_evento1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="italic"
