@@ -96,7 +96,9 @@
     <string name="accion_disponible">DISPONIBLE</string>
     <string name="observacion_parte1">Informa\u0020</string>
     <string name="observacion_parte2">que\u0020</string>
-    <string name="observacion_parte3">desde</string>
+    <string name="observacion_parte3">y se dirige al sitio del evento desde</string>
+    <string name="observacion_disponible">que se retira del sitio quedando disponible</string>
+
     <string name="notificar_a">Notificar a:</string>
     <string name="send">Enviar</string>
     <string name="cancel">Cancelar</string>
@@ -154,5 +156,7 @@
     <string name="title_activity_desarrollo">Desarrollo de Evento</string>
     <string name="title_activity_detalle">Detalle</string>
     <string name="title_activity_actualizar">Actualizar evento</string>
+    <string name="disponible">Disponible</string>
+
 
 </resources>

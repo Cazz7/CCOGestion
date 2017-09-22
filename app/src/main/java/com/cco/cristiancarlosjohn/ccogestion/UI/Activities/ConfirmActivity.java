@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.cco.cristiancarlosjohn.ccogestion.R;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.Constantes;
 import com.cco.cristiancarlosjohn.ccogestion.Tools.DataBaseHelper.UserDBHelper;
+import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.DisponibleDialogFragment;
 import com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.LocationDialogFragment;
 import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 
@@ -34,7 +35,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener{
+public class ConfirmActivity extends AppCompatActivity implements LocationDialogFragment.OnCompleteListener, DisponibleDialogFragment.OnCompleteListenerDisponible{
 
     public String Respuestas_Sito_Enviar;
 
@@ -140,7 +141,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
                 break;
             case R.id.btnSuperarEvento:
                 accion = getResources().getString(R.string.accion_disponible);
-                DisplayLocationDialog();
+                showAlertDialogDisponible();
                 break;
             default:
                 break;
@@ -189,9 +190,10 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
                         // user clicked OK, so save the mSelectedItems results somewhere
                         // here we are trying to retrieve the selected items indices
-                        Respuestas_Sito_Enviar= dbUsers.getProfile()+"-"+dbUsers.getUser()+ " informa en sitio:" ;
+                        Respuestas_Sito_Enviar= dbUsers.getProfile()+"-"+dbUsers.getUser()+ " informa que llego al sitio del evento:" ;
+
                         for(Integer i : mSelectedItems){
-                            Respuestas_Sito_Enviar +=", "+Respuesta_Sitio_String[i];
+                            Respuestas_Sito_Enviar +="\r\n"+i+"-"+Respuesta_Sitio_String[i];
                         }
                         Toast.makeText(
                                 getApplicationContext(),
@@ -222,6 +224,12 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         LocationDialogFragment alertDialog = LocationDialogFragment.newInstance("Some title");
         alertDialog.show(fm, "fragment_alert");
     }
+    private void showAlertDialogDisponible() {
+        FragmentManager fm = getSupportFragmentManager();
+        DisponibleDialogFragment alertDialog = DisponibleDialogFragment.newInstance("Some title");
+        alertDialog.show(fm, "fragment_alert");
+
+    }
 
     @Override
     //Respuesta de la elección
@@ -230,9 +238,9 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
             String observacion = obtenerObservaciones(accion,ubicacion);
             createVolleyRequest(observacion);
         }
-    }
+            }
 
-    private void createVolleyRequest(String observacion) {
+        private void createVolleyRequest(String observacion) {
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
         //Elementos a enviar a la request php
@@ -303,17 +311,30 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
 
         String parte1 = getResources().getString(R.string.observacion_parte1);
         String parte2 = getResources().getString(R.string.observacion_parte2);
-        String parte3 = getResources().getString(R.string.observacion_parte3);
+        String parte3 ="";
+
+        switch (accion){
+            case ("ACEPTO"):
+                parte3 = "que acepta el servicio "+getResources().getString(R.string.observacion_parte3)+ " " +
+                        ubicacion;
+                break;
+            case "LLEGUE_SITIO":
+                parte3 = getResources().getString(R.string.observacion_parte3);
+                break;
+            case "DISPONIBLE":
+                parte3 = getResources().getString(R.string.observacion_disponible);
+                break;
+            default:
+                break;
+        }
+
         String tarea = accion;
 
         //Se obtienen los datos del login
         String salida = parte1 + " " +
                         dbUsers.getProfile() + "-" +
                         dbUsers.getUser() + " " +
-                        parte2 + " " +
-                        tarea + " " +
-                        parte3 + " " +
-                        ubicacion;
+                        parte3;
 
         return salida;
     }
@@ -339,5 +360,14 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
     private void procesarRespuesta(JSONObject response) {
 
         //Toast.makeText(this, getResources().getString(R.string.not_unidades),Toast.LENGTH_LONG).show();;
+    }
+
+
+    @Override
+    public void onCompleteDisponible(String disponible) {
+        if( !disponible.isEmpty() && disponible != null){
+            String observacion = obtenerObservaciones(accion, disponible);
+            createVolleyRequest(observacion);
+        }
     }
 }
