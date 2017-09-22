@@ -38,6 +38,7 @@
 
     <!-- Codigos de eventos -->
     <string-array name="entradas_Cod_Eventos">
+        <item></item>
         <item>AT</item>
         <item>PA</item>
         <item>TL</item>

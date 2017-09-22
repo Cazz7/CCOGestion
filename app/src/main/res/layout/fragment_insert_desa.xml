@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cco.cristiancarlosjohn.ccogestion.UI.Fragments.InsertDesaFragment">
 
+
     <!-- Etiqueta IdRadicadoo-->
     <TextView
         android:id="@+id/idradicado_label_fi"
@@ -46,19 +47,17 @@
         android:textStyle="bold" />
 
     <!-- Sub Evento-->
-    <EditText
+    <Spinner
         android:id="@+id/subEvento_input_fi"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/idradicado_label_fi"
-        android:layout_toRightOf="@+id/subEvento_label_fi"
         android:hint="@string/fd_subEvento1"
         android:maxLength="10"
-        android:maxLines="1"
-        android:minLines="1"
-        android:phoneNumber="false"
-        android:singleLine="true" />
+        android:entries="@array/entradas_Cod_Eventos"
+        android:layout_alignBottom="@+id/subEvento_label_fi"
+        android:layout_toRightOf="@+id/subEvento_label_fi"
+        android:layout_toEndOf="@+id/subEvento_label_fi"
+        android:layout_below="@+id/idradicado_input_fi" />
 
     <!-- Observacioones -->
     <EditText
@@ -88,42 +87,31 @@
         android:textStyle="bold" />
 
     <!-- Fecha y Hora-->
-    <TextView
+    <EditText
         android:id="@+id/fecha_input_fi"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/observaciones_input_fi"
-        android:layout_toRightOf="@+id/fecha_label_fi"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:text="@string/fecha_dummy" />
+        android:text="@string/fecha_dummy"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/idradicado_input_fi"
+        android:layout_alignEnd="@+id/idradicado_input_fi" />
 
-    <!-- Etiqueta Fecha de Ingreso al Sistema-->
-    <TextView
-        android:id="@+id/fechaIng_label_fi"
-        android:layout_width="150dp"
+    <EditText
+        android:id="@+id/hora_editText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/fecha_label_fi"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="@string/fd_fechaIngreso"
-        android:textStyle="bold" />
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="10:20"
+        android:layout_alignBottom="@+id/fecha_input_fi"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/fecha_input_fi" />
 
-    <!-- Fecha de Ingreso al Sistema-->
-    <TextView
-        android:id="@+id/fechaIng_input_fi"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/fecha_label_fi"
-        android:layout_toRightOf="@id/fechaIng_label_fi"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="@string/fecha_dummy" />
 
 </RelativeLayout>
 

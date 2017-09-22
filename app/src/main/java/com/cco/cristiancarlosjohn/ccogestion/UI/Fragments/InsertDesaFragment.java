@@ -1,9 +1,11 @@
 package com.cco.cristiancarlosjohn.ccogestion.UI.Fragments;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
+import android.app.TimePickerDialog;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,6 +34,8 @@ import com.cco.cristiancarlosjohn.ccogestion.WEB.VolleySingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,12 +53,12 @@ public class InsertDesaFragment extends Fragment {
     //Elementos
     TextView idRadicadoInput;
     EditText eventoInput;
-    EditText subEventoInput;
+    Spinner subEventoInput;
     EditText observacionesInput;
     EditText estadoInput;
-    TextView fechaInput;
-    TextView fechaIngInput;
-    EditText usuarioInput;
+    EditText fechaInput;
+    //TextView fechaIngInput;
+    EditText hora_editext;
 
     //DbHelper
     UserDBHelper userDB = new UserDBHelper(getActivity());
@@ -75,10 +81,19 @@ public class InsertDesaFragment extends Fragment {
 
         // Obtención de instancias controles
         idRadicadoInput = (TextView) v.findViewById(R.id.idradicado_input_fi);
-        subEventoInput = (EditText) v.findViewById(R.id.subEvento_input_fi);
+        subEventoInput = (Spinner) v.findViewById(R.id.subEvento_input_fi);
         observacionesInput = (EditText) v.findViewById(R.id.observaciones_input_fi);
-        fechaInput = (TextView) v.findViewById(R.id.fecha_input_fi);
-        fechaIngInput = (TextView) v.findViewById(R.id.fechaIng_input_fi);
+        fechaInput = (EditText) v.findViewById(R.id.fecha_input_fi);
+        hora_editext = (EditText) v.findViewById(R.id.hora_editText);
+
+
+        //Obtener fecha y hora actual
+        java.util.Date fechaActual = new java.util.Date();
+        DateFormat formatofechas = new SimpleDateFormat("yyyy/MM/dd");
+        fechaInput.setText(formatofechas.format(fechaActual));
+        java.util.Date horaActual = new java.util.Date();
+        DateFormat formatohoras = new SimpleDateFormat("HH:mm");
+        hora_editext.setText(formatohoras.format(horaActual));
 
         setDefaultFields();
 
@@ -93,8 +108,35 @@ public class InsertDesaFragment extends Fragment {
                     }
                 }
         );
+        //llamada TimePickerDialog
 
-        fechaIngInput.setOnClickListener(
+        hora_editext.setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        if (selectedMinute<10) {
+                            hora_editext.setText(selectedHour + ":0" + selectedMinute);
+                        } else {
+                            hora_editext.setText(selectedHour + ":" + selectedMinute);
+                        }
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Seleccione hora");
+                mTimePicker.show();
+
+            }
+        });
+
+        /*fechaIngInput.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,7 +145,7 @@ public class InsertDesaFragment extends Fragment {
 
                     }
                 }
-        );
+        );*/
 
         return v;
     }
@@ -156,17 +198,23 @@ public class InsertDesaFragment extends Fragment {
      */
     public void guardarDesaEvento() {
 
+        //Obtener fecha y hora actual
+        java.util.Date fechaActual=new java.util.Date();
+        DateFormat formatofechas = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        String fechaIng= (formatofechas.format(fechaActual));
+
         // Obtener valores actuales de los controles
         final String idRadicado = idRadicadoInput.getText().toString();
-        final String subEvento = subEventoInput.getText().toString();
+        final String subEvento = subEventoInput.getSelectedItem().toString();
         final String observaciones = observacionesInput.getText().toString();
-        final String fecha = fechaIngInput.getText().toString();
-        final String fechaIng = fechaIngInput.getText().toString();
+        final String fecha = fechaInput.getText().toString();
+        final String hora = hora_editext.getText().toString();
+        //final String fechaIng = fechaIngInput.getText().toString();
 
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
 
         map.put("IdRadicado", idRadicado);
-        map.put("FECHA", fecha);
+        map.put("FECHA", fecha+" "+hora);
         map.put("COD_EVENTO", InsertDesaActivity.cod_evento);
         map.put("SUB_EVENTO", subEvento);
         map.put("OBSERVACIONES", observaciones);
@@ -272,15 +320,15 @@ public class InsertDesaFragment extends Fragment {
      * están completos
      */
     public boolean camposVacios() {
-        String subEvento = subEventoInput.getText().toString();
+        //String subEvento = subEventoInput.getSelectedItem().toString();
         String observaciones = observacionesInput.getText().toString();
 
-        return (subEvento.isEmpty() || observaciones.isEmpty());
+        return (observaciones.isEmpty());
     }
 
     /**
      * Actualiza la fechas de los campos {@link fechaInput}
-     * Actualiza la fechas de los campos {@link fechaIngInput}
+     * Actualiza la fechas de los campos {@lin fechaIngInput}
      *
      * @param ano Año
      * @param mes Mes
@@ -289,7 +337,7 @@ public class InsertDesaFragment extends Fragment {
     public void actualizarFecha(int ano, int mes, int dia) {
         // Setear en el textview la fecha
         fechaInput.setText(ano + "-" + (mes + 1) + "-" + dia);
-        fechaIngInput.setText(ano + "-" + (mes + 1) + "-" + dia);
+        //fechaIngInput.setText(ano + "-" + (mes + 1) + "-" + dia);
     }
 
     /**

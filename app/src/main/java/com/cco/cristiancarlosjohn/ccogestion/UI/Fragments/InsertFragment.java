@@ -485,11 +485,12 @@ public class InsertFragment extends Fragment {
 
 
     public boolean camposVacios() {
+        final String Cod_Evento = Cod_Evento_spinner.getSelectedItem().toString();
         // String titulo = titulo_input.getText().toString();
         //String descripcion = descripcion_input.getText().toString();
 
-        //return (titulo.isEmpty() || descripcion.isEmpty());
-        return false;
+        return (Cod_Evento.isEmpty());
+
     }
 
     /**
