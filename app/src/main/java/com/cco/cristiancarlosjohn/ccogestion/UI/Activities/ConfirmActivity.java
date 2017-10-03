@@ -252,7 +252,7 @@ public class ConfirmActivity extends AppCompatActivity implements LocationDialog
         map.put(Constantes.ESTADO, "ABIERTO");
         map.put(Constantes.USUARIO, dbUsers.getUser());
         map.put(Constantes.FECHA_ING_SISTEMA, ObtenerTiempo());
-        map.put(Constantes.PERFILES_NOTI, "GESTION VIAL," + dbUsers.getProfile());
+        map.put(Constantes.PERFILES_NOTI, "GESTION_VIAL," + dbUsers.getProfile());
         map.put(Constantes.ACCION, accion); //TODO: Cambiar el texto de la acción
         map.put(Constantes.UNIDAD, dbUsers.getProfile());
         map.put(Constantes.VIA, via);

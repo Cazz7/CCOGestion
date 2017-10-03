@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cco.cristiancarlosjohn.ccogestion.UI.Activities.LoginActivity">
 
-    <ImageView
+        <ImageView
         android:layout_width="400dp"
         android:layout_height="150dp"
         android:id="@+id/ivLogoCCG"
@@ -102,5 +102,7 @@
         android:background="@color/primary"
         android:text="CONECTARSE"
         android:textColor="@color/colorWhite" />
+
+
 
 </RelativeLayout>
